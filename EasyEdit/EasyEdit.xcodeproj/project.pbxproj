@@ -13,6 +13,7 @@
 		4217549D22EF537F00F0D689 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4217549B22EF537F00F0D689 /* LaunchScreen.storyboard */; };
 		421754A522EF552700F0D689 /* PlayVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421754A422EF552700F0D689 /* PlayVideoViewController.swift */; };
 		421754A722EF55E500F0D689 /* VideoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421754A622EF55E500F0D689 /* VideoHelper.swift */; };
+		421754A922EF5E5000F0D689 /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421754A822EF5E5000F0D689 /* RecordVideoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4217549E22EF537F00F0D689 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		421754A422EF552700F0D689 /* PlayVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayVideoViewController.swift; sourceTree = "<group>"; };
 		421754A622EF55E500F0D689 /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; };
+		421754A822EF5E5000F0D689 /* RecordVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				4217549222EF537D00F0D689 /* AppDelegate.swift */,
 				4217549622EF537D00F0D689 /* Main.storyboard */,
 				421754A422EF552700F0D689 /* PlayVideoViewController.swift */,
+				421754A822EF5E5000F0D689 /* RecordVideoViewController.swift */,
 				421754A622EF55E500F0D689 /* VideoHelper.swift */,
 				4217549922EF537F00F0D689 /* Assets.xcassets */,
 				4217549B22EF537F00F0D689 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				421754A722EF55E500F0D689 /* VideoHelper.swift in Sources */,
 				421754A522EF552700F0D689 /* PlayVideoViewController.swift in Sources */,
 				4217549322EF537D00F0D689 /* AppDelegate.swift in Sources */,
+				421754A922EF5E5000F0D689 /* RecordVideoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -86,14 +86,27 @@
             </objects>
             <point key="canvasLocation" x="636" y="-46"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Video View Controller-->
         <scene sceneID="Bhu-3z-YDB">
             <objects>
-                <viewController id="F7Z-fP-zji" sceneMemberID="viewController">
+                <viewController id="F7Z-fP-zji" customClass="RecordVideoViewController" customModule="EasyEdit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MGs-HQ-swB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsv-Xb-nlW">
+                                <rect key="frame" x="161" y="433" width="92" height="30"/>
+                                <state key="normal" title="Record Video"/>
+                                <connections>
+                                    <action selector="recordVideoButtonTapped:" destination="F7Z-fP-zji" eventType="touchUpInside" id="pIF-mj-FJ7"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Bsv-Xb-nlW" firstAttribute="centerX" secondItem="MGs-HQ-swB" secondAttribute="centerX" id="7E1-Yl-rYy"/>
+                            <constraint firstItem="Bsv-Xb-nlW" firstAttribute="centerY" secondItem="MGs-HQ-swB" secondAttribute="centerY" id="fIT-u7-lYw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="yPj-87-mPT"/>
                     </view>
                 </viewController>
