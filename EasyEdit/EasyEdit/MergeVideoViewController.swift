@@ -92,11 +92,11 @@ class MergeVideoViewController: UIViewController {
     
     @IBAction func loadAudioAssetButtonTapped(_ sender: Any) {
         
-        let path = Bundle.main.path(forResource: "failure.wav", ofType: nil)!
+        let path = Bundle.main.path(forResource: "wow.wav", ofType: nil)!
         let url = URL(fileURLWithPath: path)
         self.audioAsset = AVAsset(url: url)
-        let title = (url == nil) ? "Asset Not Available" : "Asset Loaded"
-        let message = (url == nil) ? "Audio Not Loaded" : "Audio Loaded"
+        let title = "Asset Loaded"
+        let message = "Audio Loaded"
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:nil))
@@ -127,13 +127,25 @@ class MergeVideoViewController: UIViewController {
             return
         }
         
+        let mainInstruction = AVMutableVideoCompositionInstruction()
+        mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero,
+                                                    duration: CMTimeAdd(CMTime.zero, firstAsset!.duration))
+        
+        let firstInstruction = VideoHelper.videoCompositionInstruction(firstTrack, asset: firstAsset!)
+        
+        mainInstruction.layerInstructions = [firstInstruction]
+        let mainComposition = AVMutableVideoComposition()
+        mainComposition.instructions = [mainInstruction]
+        mainComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
+        mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
         
         // 3 - Audio track
         if let loadedAudioAsset = audioAsset {
             let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
             do {
                 try audioTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
-                                                                duration: CMTimeAdd(firstAsset!.duration, firstAsset!.duration)),
+                                                                duration: CMTimeAdd(CMTime.zero, firstAsset!.duration)),
                                                 of: loadedAudioAsset.tracks(withMediaType: AVMediaType.audio)[0] ,
                                                 at: CMTime.zero)
             } catch {
@@ -160,7 +172,7 @@ class MergeVideoViewController: UIViewController {
         exporter.outputURL = url
         exporter.outputFileType = AVFileType.mov
         exporter.shouldOptimizeForNetworkUse = true
-        
+        exporter.videoComposition = mainComposition
         // 6 - Perform the Export
         exporter.exportAsynchronously() {
             DispatchQueue.main.async {
