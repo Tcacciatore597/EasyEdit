@@ -43,7 +43,6 @@ extension RecordVideoViewController: UIImagePickerControllerDelegate {
                 return
         }
         
-        // Handle a movie capture
         UISaveVideoAtPathToSavedPhotosAlbum(
             url.path,
             self,

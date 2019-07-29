@@ -148,10 +148,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cxJ-CZ-LAm" userLabel="Activity Monitor">
-                                <rect key="frame" x="197" y="549" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -160,9 +156,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Je7-CB-5EY"/>
                     </view>
-                    <connections>
-                        <outlet property="activityMonitor" destination="cxJ-CZ-LAm" id="mXx-gE-PaG"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYR-Bt-3iC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

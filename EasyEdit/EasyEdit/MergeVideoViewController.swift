@@ -18,6 +18,7 @@ class MergeVideoViewController: UIViewController {
     var audioAsset: AVAsset?
     
     @IBOutlet weak var activityMonitor: UIActivityIndicatorView!
+    
     func savedPhotosAvailable() -> Bool {
         guard !UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) else { return true }
         
@@ -29,8 +30,7 @@ class MergeVideoViewController: UIViewController {
     
     func exportDidFinish(_ session: AVAssetExportSession) {
         
-        // Cleanup assets
-        activityMonitor.stopAnimating()
+//        activityMonitor.stopAnimating()
         firstAsset = nil
         audioAsset = nil
         
@@ -66,21 +66,6 @@ class MergeVideoViewController: UIViewController {
             saveVideoToPhotos()
         }
     }
-
-//    var audioPlayer = AVAudioPlayer()
-//    
-//    func playSaveSound(){
-//        let path = Bundle.main.path(forResource: "failure.wav", ofType: nil)!
-//        let url = URL(fileURLWithPath: path)
-//        
-//        do {
-//            //create your audioPlayer in your parent class as a property
-//            audioPlayer = try AVAudioPlayer(contentsOf: url)
-//            audioPlayer.play()
-//        } catch {
-//            print("couldn't load the file")
-//        }
-//    }
   
     
     @IBAction func loadVideoAssetButtonTapped(_ sender: Any) {
@@ -106,21 +91,20 @@ class MergeVideoViewController: UIViewController {
     
     @IBAction func mergeVideoButtonTapped(_ sender: Any) {
         
-        activityMonitor.startAnimating()
+//        activityMonitor.startAnimating()
         
-        // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
         let mixComposition = AVMutableComposition()
         
-        // 2 - Create two video tracks
         guard
             let firstTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
                                                             preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             else {
                 return
-        }
+            }
+        guard let firstAsset = firstAsset else { return }
         do {
-            try firstTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: firstAsset!.duration),
-                                           of: (firstAsset?.tracks(withMediaType: AVMediaType.video)[0])!,
+            try firstTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: firstAsset.duration),
+                                           of: (firstAsset.tracks(withMediaType: AVMediaType.video)[0]),
                                            at: CMTime.zero)
         } catch {
             print("Failed to load first track")
@@ -129,9 +113,9 @@ class MergeVideoViewController: UIViewController {
         
         let mainInstruction = AVMutableVideoCompositionInstruction()
         mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero,
-                                                    duration: CMTimeAdd(CMTime.zero, firstAsset!.duration))
+                                                    duration: CMTimeAdd(CMTime.zero, firstAsset.duration))
         
-        let firstInstruction = VideoHelper.videoCompositionInstruction(firstTrack, asset: firstAsset!)
+        let firstInstruction = VideoHelper.videoCompositionInstruction(firstTrack, asset: firstAsset)
         
         mainInstruction.layerInstructions = [firstInstruction]
         let mainComposition = AVMutableVideoComposition()
@@ -140,35 +124,37 @@ class MergeVideoViewController: UIViewController {
         mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         
         
-        // 3 - Audio track
         if let loadedAudioAsset = audioAsset {
-            let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
+            guard let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0) else { return }
             do {
-                try audioTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
-                                                                duration: CMTimeAdd(CMTime.zero, firstAsset!.duration)),
+                
+                try audioTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+                                                                duration: CMTimeAdd(CMTime.zero, firstAsset.duration)),
                                                 of: loadedAudioAsset.tracks(withMediaType: AVMediaType.audio)[0] ,
                                                 at: CMTime.zero)
+                
+             
             } catch {
                 print("Failed to load Audio track")
             }
         }
         
-        // 4 - Get path
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory,
                                                                in: .userDomainMask).first else {
                                                                 return
         }
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
         let date = dateFormatter.string(from: Date())
         let url = documentDirectory.appendingPathComponent("mergeVideo-\(date).mov")
         
-        // 5 - Create Exporter
         guard let exporter = AVAssetExportSession(asset: mixComposition,
                                                   presetName: AVAssetExportPresetHighestQuality) else {
                                                     return
         }
+        
         exporter.outputURL = url
         exporter.outputFileType = AVFileType.mov
         exporter.shouldOptimizeForNetworkUse = true
@@ -177,13 +163,13 @@ class MergeVideoViewController: UIViewController {
         exporter.exportAsynchronously() {
             DispatchQueue.main.async {
                 self.exportDidFinish(exporter)
+                
+                VideoHelper.startMediaBrowser(delegate: self, sourceType: .savedPhotosAlbum)
+                
             }
         }
         
-        
     }
-    
-   
 
 }
 
@@ -202,6 +188,8 @@ extension MergeVideoViewController: UIImagePickerControllerDelegate {
         let alert = UIAlertController(title: "Asset Loaded", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+        
+        
     }
     
 }
