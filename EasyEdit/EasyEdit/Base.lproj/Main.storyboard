@@ -122,21 +122,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wag-iS-VM0">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="mergeVideoButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="H7i-oU-l5z"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="I7l-l4-1lf">
+                                <rect key="frame" x="147" y="355" width="120" height="186"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTK-rp-o4t">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
+                                        <state key="normal" title="Load Video Asset"/>
+                                        <connections>
+                                            <action selector="loadVideoAssetButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="WuI-ZB-foJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zw1-OF-kJy">
+                                        <rect key="frame" x="21.5" y="78" width="77" height="30"/>
+                                        <state key="normal" title="Load Audio"/>
+                                        <connections>
+                                            <action selector="loadAudioAssetButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="fWx-vt-Ucb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wag-iS-VM0">
+                                        <rect key="frame" x="38" y="156" width="44" height="30"/>
+                                        <state key="normal" title="Merge"/>
+                                        <connections>
+                                            <action selector="mergeVideoButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="H7i-oU-l5z"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cxJ-CZ-LAm" userLabel="Activity Monitor">
+                                <rect key="frame" x="197" y="549" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Wag-iS-VM0" firstAttribute="centerY" secondItem="aN3-eM-GN0" secondAttribute="centerY" id="LHd-UV-kSm"/>
-                            <constraint firstItem="Wag-iS-VM0" firstAttribute="centerX" secondItem="aN3-eM-GN0" secondAttribute="centerX" id="MED-cd-zfH"/>
+                            <constraint firstItem="I7l-l4-1lf" firstAttribute="centerY" secondItem="aN3-eM-GN0" secondAttribute="centerY" id="EbS-EM-147"/>
+                            <constraint firstItem="I7l-l4-1lf" firstAttribute="centerX" secondItem="aN3-eM-GN0" secondAttribute="centerX" id="N3v-SJ-ZJ8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Je7-CB-5EY"/>
                     </view>
+                    <connections>
+                        <outlet property="activityMonitor" destination="cxJ-CZ-LAm" id="mXx-gE-PaG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYR-Bt-3iC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
