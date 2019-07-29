@@ -84,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ne-2m-pGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="636" y="-46"/>
+            <point key="canvasLocation" x="725" y="-33"/>
         </scene>
         <!--Record Video View Controller-->
         <scene sceneID="Bhu-3z-YDB">
@@ -114,20 +114,33 @@
             </objects>
             <point key="canvasLocation" x="725" y="665"/>
         </scene>
-        <!--View Controller-->
+        <!--Merge Video View Controller-->
         <scene sceneID="CP0-Hd-t9e">
             <objects>
-                <viewController id="oow-Ag-OGK" sceneMemberID="viewController">
+                <viewController id="oow-Ag-OGK" customClass="MergeVideoViewController" customModule="EasyEdit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aN3-eM-GN0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wag-iS-VM0">
+                                <rect key="frame" x="184" y="433" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="mergeVideoButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="H7i-oU-l5z"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Wag-iS-VM0" firstAttribute="centerY" secondItem="aN3-eM-GN0" secondAttribute="centerY" id="LHd-UV-kSm"/>
+                            <constraint firstItem="Wag-iS-VM0" firstAttribute="centerX" secondItem="aN3-eM-GN0" secondAttribute="centerX" id="MED-cd-zfH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Je7-CB-5EY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYR-Bt-3iC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="552" y="1370"/>
+            <point key="canvasLocation" x="725" y="1376"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JCY-Ev-VUn">
