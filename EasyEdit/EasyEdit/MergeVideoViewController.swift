@@ -113,7 +113,7 @@ class MergeVideoViewController: UIViewController {
         
         let mainInstruction = AVMutableVideoCompositionInstruction()
         mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero,
-                                                    duration: CMTimeAdd(CMTime.zero, firstAsset.duration))
+                                                    duration: firstAsset.duration)
         
         let firstInstruction = VideoHelper.videoCompositionInstruction(firstTrack, asset: firstAsset)
         
@@ -129,10 +129,9 @@ class MergeVideoViewController: UIViewController {
             do {
                 
                 try audioTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
-                                                                duration: CMTimeAdd(CMTime.zero, firstAsset.duration)),
+                                                                duration: loadedAudioAsset.duration),
                                                 of: loadedAudioAsset.tracks(withMediaType: AVMediaType.audio)[0] ,
-                                                at: CMTime.zero)
-                
+                                                at: CMTime(seconds: 2.0, preferredTimescale: CMTimeScale(1.0)))
              
             } catch {
                 print("Failed to load Audio track")
@@ -163,9 +162,6 @@ class MergeVideoViewController: UIViewController {
         exporter.exportAsynchronously() {
             DispatchQueue.main.async {
                 self.exportDidFinish(exporter)
-                
-                VideoHelper.startMediaBrowser(delegate: self, sourceType: .savedPhotosAlbum)
-                
             }
         }
         
