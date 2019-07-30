@@ -17,7 +17,7 @@ class MergeVideoViewController: UIViewController {
     var playerLayer: AVPlayerLayer?
     var player: AVPlayer?
     var videoURL: URL?
-    
+    var userSelectedTime: Double?
     var firstAsset: AVAsset?
     var audioAsset: AVAsset?
     
@@ -77,17 +77,19 @@ class MergeVideoViewController: UIViewController {
                 self.videoSlider.value = Float(seconds / durationSeconds)
                 
             }
+            
         })
         
     }
     
     func handleSliderChange() {
-        print(videoSlider.value)
+        
         if let duration = player?.currentItem?.duration {
             let totalSeconds = CMTimeGetSeconds(duration)
             let value = Float64(videoSlider.value) * totalSeconds
             let seekTime = CMTime(value: Int64(value), timescale: 1)
             player?.seek(to: seekTime)
+            self.userSelectedTime = Double(value)
         }
     }
     
@@ -211,7 +213,7 @@ class MergeVideoViewController: UIViewController {
                 try audioTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
                                                                 duration: loadedAudioAsset.duration),
                                                 of: loadedAudioAsset.tracks(withMediaType: AVMediaType.audio)[0] ,
-                                                at: CMTime(seconds: 2.0, preferredTimescale: CMTimeScale(1.0)))
+                                                at: CMTime(seconds: userSelectedTime ?? 0.0, preferredTimescale: CMTimeScale(1.0)))
                 //Change above code at: CMTime to adjust when the audio is played.
                 
             } catch {

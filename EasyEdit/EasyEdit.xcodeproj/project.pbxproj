@@ -18,7 +18,6 @@
 		421754B222EF6BFE00F0D689 /* success.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 421754AF22EF6BFE00F0D689 /* success.mp3 */; };
 		421754B322EF6BFE00F0D689 /* failure.wav in Resources */ = {isa = PBXBuildFile; fileRef = 421754B022EF6BFE00F0D689 /* failure.wav */; };
 		421754B422EF6BFE00F0D689 /* wow.wav in Resources */ = {isa = PBXBuildFile; fileRef = 421754B122EF6BFE00F0D689 /* wow.wav */; };
-		425C2DC222F0CF3100B890FF /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425C2DC122F0CF3100B890FF /* VideoPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +34,6 @@
 		421754AF22EF6BFE00F0D689 /* success.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = success.mp3; sourceTree = "<group>"; };
 		421754B022EF6BFE00F0D689 /* failure.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = failure.wav; sourceTree = "<group>"; };
 		421754B122EF6BFE00F0D689 /* wow.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wow.wav; sourceTree = "<group>"; };
-		425C2DC122F0CF3100B890FF /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +71,6 @@
 				421754A422EF552700F0D689 /* PlayVideoViewController.swift */,
 				421754A822EF5E5000F0D689 /* RecordVideoViewController.swift */,
 				421754AC22EF6AAE00F0D689 /* MergeVideoViewController.swift */,
-				425C2DC122F0CF3100B890FF /* VideoPlayerView.swift */,
 				425C2DBA22F0AF2F00B890FF /* Helpers */,
 				4217549922EF537F00F0D689 /* Assets.xcassets */,
 				4217549B22EF537F00F0D689 /* LaunchScreen.storyboard */,
@@ -180,7 +177,6 @@
 				421754A522EF552700F0D689 /* PlayVideoViewController.swift in Sources */,
 				4217549322EF537D00F0D689 /* AppDelegate.swift in Sources */,
 				421754A922EF5E5000F0D689 /* RecordVideoViewController.swift in Sources */,
-				425C2DC222F0CF3100B890FF /* VideoPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
