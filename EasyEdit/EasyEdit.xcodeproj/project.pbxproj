@@ -71,7 +71,7 @@
 				421754A422EF552700F0D689 /* PlayVideoViewController.swift */,
 				421754A822EF5E5000F0D689 /* RecordVideoViewController.swift */,
 				421754AC22EF6AAE00F0D689 /* MergeVideoViewController.swift */,
-				421754A622EF55E500F0D689 /* VideoHelper.swift */,
+				425C2DBA22F0AF2F00B890FF /* Helpers */,
 				4217549922EF537F00F0D689 /* Assets.xcassets */,
 				4217549B22EF537F00F0D689 /* LaunchScreen.storyboard */,
 				4217549E22EF537F00F0D689 /* Info.plist */,
@@ -88,6 +88,14 @@
 				421754B122EF6BFE00F0D689 /* wow.wav */,
 			);
 			path = EasyEditSoundClips;
+			sourceTree = "<group>";
+		};
+		425C2DBA22F0AF2F00B890FF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				421754A622EF55E500F0D689 /* VideoHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

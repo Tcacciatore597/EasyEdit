@@ -122,8 +122,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="I7l-l4-1lf">
-                                <rect key="frame" x="147" y="355" width="120" height="186"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="I7l-l4-1lf">
+                                <rect key="frame" x="147" y="404" width="120" height="186"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTK-rp-o4t">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
@@ -150,10 +151,6 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="I7l-l4-1lf" firstAttribute="centerY" secondItem="aN3-eM-GN0" secondAttribute="centerY" id="EbS-EM-147"/>
-                            <constraint firstItem="I7l-l4-1lf" firstAttribute="centerX" secondItem="aN3-eM-GN0" secondAttribute="centerX" id="N3v-SJ-ZJ8"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Je7-CB-5EY"/>
                     </view>
                 </viewController>

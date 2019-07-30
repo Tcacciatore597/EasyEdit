@@ -12,11 +12,7 @@ import MobileCoreServices
 
 class PlayVideoViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("THE CMTIME IS HERE:  \(CMTime.zero)")
 
-    }
     @IBAction func playVideoButtonTapped(_ sender: Any) {
         VideoHelper.startMediaBrowser(delegate: self, sourceType: .savedPhotosAlbum)
 

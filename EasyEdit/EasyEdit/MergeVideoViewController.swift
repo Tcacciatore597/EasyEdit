@@ -14,10 +14,14 @@ import Photos
 
 class MergeVideoViewController: UIViewController {
     
+    var playerLayer: AVPlayerLayer?
+    
     var firstAsset: AVAsset?
     var audioAsset: AVAsset?
     
     @IBOutlet weak var activityMonitor: UIActivityIndicatorView!
+    
+    
     
     func savedPhotosAvailable() -> Bool {
         guard !UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) else { return true }
@@ -72,6 +76,7 @@ class MergeVideoViewController: UIViewController {
         if savedPhotosAvailable() {
             VideoHelper.startMediaBrowser(delegate: self, sourceType: .savedPhotosAlbum)
         }
+        //Set first asset to URL passed from delegate. ???
     }
     
     
@@ -132,7 +137,8 @@ class MergeVideoViewController: UIViewController {
                                                                 duration: loadedAudioAsset.duration),
                                                 of: loadedAudioAsset.tracks(withMediaType: AVMediaType.audio)[0] ,
                                                 at: CMTime(seconds: 2.0, preferredTimescale: CMTimeScale(1.0)))
-             
+                //Change above code at: CMTime to adjust when the audio is played.
+                
             } catch {
                 print("Failed to load Audio track")
             }
@@ -179,11 +185,23 @@ extension MergeVideoViewController: UIImagePickerControllerDelegate {
             else { return }
   
         let avAsset = AVAsset(url: url)
-        let message = "Video one loaded"
+        let message = "Video loaded"
             firstAsset = avAsset
         let alert = UIAlertController(title: "Asset Loaded", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+        
+        
+        let player = AVPlayer(url: url)
+        playerLayer = AVPlayerLayer(player: player)
+        var topRect = self.view.bounds
+        topRect.size.width = topRect.width
+        topRect.size.height = topRect.height / 3
+        topRect.origin.y = view.layoutMargins.top
+        playerLayer!.frame = topRect
+        playerLayer!.backgroundColor = UIColor.black.cgColor
+        self.view!.layer.addSublayer(playerLayer!)
+        player.play()
         
         
     }
@@ -218,3 +236,6 @@ extension MergeVideoViewController: MPMediaPickerControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
+
+
+
