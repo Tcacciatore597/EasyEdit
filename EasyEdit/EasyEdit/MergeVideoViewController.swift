@@ -15,13 +15,27 @@ import Photos
 class MergeVideoViewController: UIViewController {
     
     var playerLayer: AVPlayerLayer?
+    var player: AVPlayer?
+    var videoURL: URL?
     
     var firstAsset: AVAsset?
     var audioAsset: AVAsset?
     
-    @IBOutlet weak var activityMonitor: UIActivityIndicatorView!
+    
+    @IBOutlet weak var timeElapsedLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var videoSlider: UISlider!
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        createPlayerView()
+    }
+    
+
+    @IBAction func sliderValueChanged(_ sender: Any) {
+        handleSliderChange()
+    }
     
     func savedPhotosAvailable() -> Bool {
         guard !UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) else { return true }
@@ -32,6 +46,67 @@ class MergeVideoViewController: UIViewController {
         return false
     }
     
+    func createPlayerView() {
+        
+        guard let videoURL = videoURL else { return }
+        player = AVPlayer(url: videoURL)
+        playerLayer = AVPlayerLayer(player: player)
+        var topRect = self.view.bounds
+        topRect.size.width = topRect.width
+        topRect.size.height = topRect.height / 2
+        topRect.origin.y = view.layoutMargins.top
+        playerLayer!.frame = topRect
+        playerLayer!.backgroundColor = UIColor.black.cgColor
+        self.view!.layer.addSublayer(playerLayer!)
+        player?.play()
+        
+        player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+//        player?.removeTimeObserver(self)
+        let interval = CMTime(value: 1, timescale: 2)
+        self.player?.addPeriodicTimeObserver(forInterval: interval, queue: .main, using: {  (progressTime) in
+            let seconds = CMTimeGetSeconds(progressTime)
+            let secondsString = String(format: "%02d", Int(seconds.truncatingRemainder(dividingBy: 60)))
+            let minutesString = String(format: "%02d", Int(seconds / 60))
+            
+            self.timeElapsedLabel.text = "\(minutesString):\(secondsString)"
+            
+            //lets move the slider thumb
+            if let duration = self.player?.currentItem?.duration {
+                let durationSeconds = CMTimeGetSeconds(duration)
+                
+                self.videoSlider.value = Float(seconds / durationSeconds)
+                
+            }
+        })
+        
+    }
+    
+    func handleSliderChange() {
+        print(videoSlider.value)
+        if let duration = player?.currentItem?.duration {
+            let totalSeconds = CMTimeGetSeconds(duration)
+            let value = Float64(videoSlider.value) * totalSeconds
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            player?.seek(to: seekTime)
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "currentItem.loadedTimeRanges" {
+            if let duration = player?.currentItem?.duration {
+                let seconds = CMTimeGetSeconds(duration)
+                let secondsText = Int(seconds) % 60
+                let minutesText = String(format: "%02d", Int(seconds) / 60)
+                if secondsText < 10 {
+                    durationLabel.text = "\(minutesText):0\(secondsText)"
+                } else {
+                    durationLabel.text = "\(minutesText):\(secondsText)"
+
+                }
+            }
+        }
+    }
+
     func exportDidFinish(_ session: AVAssetExportSession) {
         
 //        activityMonitor.stopAnimating()
@@ -190,19 +265,7 @@ extension MergeVideoViewController: UIImagePickerControllerDelegate {
         let alert = UIAlertController(title: "Asset Loaded", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         present(alert, animated: true, completion: nil)
-        
-        
-        let player = AVPlayer(url: url)
-        playerLayer = AVPlayerLayer(player: player)
-        var topRect = self.view.bounds
-        topRect.size.width = topRect.width
-        topRect.size.height = topRect.height / 2
-        topRect.origin.y = view.layoutMargins.top
-        playerLayer!.frame = topRect
-        playerLayer!.backgroundColor = UIColor.black.cgColor
-        self.view!.layer.addSublayer(playerLayer!)
-        player.play()
-        
+        videoURL = url
         
     }
     
