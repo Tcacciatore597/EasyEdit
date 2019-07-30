@@ -122,26 +122,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="I7l-l4-1lf">
-                                <rect key="frame" x="147" y="404" width="120" height="186"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="I7l-l4-1lf">
+                                <rect key="frame" x="8" y="708" width="398" height="138"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTK-rp-o4t">
-                                        <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="30"/>
                                         <state key="normal" title="Load Video Asset"/>
                                         <connections>
                                             <action selector="loadVideoAssetButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="WuI-ZB-foJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zw1-OF-kJy">
-                                        <rect key="frame" x="21.5" y="78" width="77" height="30"/>
+                                        <rect key="frame" x="0.0" y="54" width="398" height="30"/>
                                         <state key="normal" title="Load Audio"/>
                                         <connections>
                                             <action selector="loadAudioAssetButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="fWx-vt-Ucb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wag-iS-VM0">
-                                        <rect key="frame" x="38" y="156" width="44" height="30"/>
+                                        <rect key="frame" x="0.0" y="108" width="398" height="30"/>
                                         <state key="normal" title="Merge"/>
                                         <connections>
                                             <action selector="mergeVideoButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="H7i-oU-l5z"/>
@@ -149,8 +148,22 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use slider to insert audio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjx-We-yu7">
+                                <rect key="frame" x="8" y="679.5" width="398" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="I7l-l4-1lf" firstAttribute="top" secondItem="fjx-We-yu7" secondAttribute="bottom" constant="8" id="F6h-KD-Dr7"/>
+                            <constraint firstItem="Je7-CB-5EY" firstAttribute="bottom" secondItem="I7l-l4-1lf" secondAttribute="bottom" constant="16" id="WO2-jG-O1Z"/>
+                            <constraint firstItem="I7l-l4-1lf" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="bR8-kQ-yM6"/>
+                            <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="I7l-l4-1lf" secondAttribute="trailing" constant="8" id="npo-IK-riu"/>
+                            <constraint firstItem="fjx-We-yu7" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="qUM-fU-VWU"/>
+                            <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="fjx-We-yu7" secondAttribute="trailing" constant="8" id="u8J-Sn-zm4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Je7-CB-5EY"/>
                     </view>
                 </viewController>

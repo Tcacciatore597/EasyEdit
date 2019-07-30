@@ -196,7 +196,7 @@ extension MergeVideoViewController: UIImagePickerControllerDelegate {
         playerLayer = AVPlayerLayer(player: player)
         var topRect = self.view.bounds
         topRect.size.width = topRect.width
-        topRect.size.height = topRect.height / 3
+        topRect.size.height = topRect.height / 2
         topRect.origin.y = view.layoutMargins.top
         playerLayer!.frame = topRect
         playerLayer!.backgroundColor = UIColor.black.cgColor
