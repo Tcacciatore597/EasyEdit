@@ -27,6 +27,8 @@ class MergeVideoViewController: UIViewController {
     @IBOutlet weak var timeElapsedLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var videoSlider: UISlider!
+    @IBOutlet weak var loadAudioButton: UIButton!
+    @IBOutlet weak var mergeButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -34,11 +36,19 @@ class MergeVideoViewController: UIViewController {
         videoSlider.value = 0
         stopPlayButton.isHidden = true
         videoSlider.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        mergeButton.isHidden = true
+        loadAudioButton.isHidden = true
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         createPlayerView()
         stopPlayButton.setTitle("Play", for: .normal)
+        if firstAsset != nil && audioAsset != nil {
+            mergeButton.isHidden = false
+        } else if firstAsset != nil {
+            loadAudioButton.isHidden = false
+        }
     }
     
     @IBAction func stopPlayButtonTapped(_ sender: Any) {

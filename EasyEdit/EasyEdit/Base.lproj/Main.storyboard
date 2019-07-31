@@ -170,6 +170,8 @@
                     </view>
                     <connections>
                         <outlet property="durationLabel" destination="vHv-ER-U7h" id="Gsc-zv-4i4"/>
+                        <outlet property="loadAudioButton" destination="Zw1-OF-kJy" id="cqh-fv-L6u"/>
+                        <outlet property="mergeButton" destination="Wag-iS-VM0" id="8R2-70-oT3"/>
                         <outlet property="stopPlayButton" destination="1Ot-KM-d8V" id="Uy9-Iw-Rix"/>
                         <outlet property="timeElapsedLabel" destination="V8C-eC-6ew" id="EHn-uV-RqO"/>
                         <outlet property="videoSlider" destination="2Wr-iI-4HH" id="B3T-rh-KTg"/>
