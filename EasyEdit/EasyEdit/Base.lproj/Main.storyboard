@@ -137,6 +137,7 @@
                                         <state key="normal" title="Load Audio"/>
                                         <connections>
                                             <action selector="loadAudioAssetButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="fWx-vt-Ucb"/>
+                                            <segue destination="IR5-l0-Z26" kind="show" identifier="SoundClipSegue" id="KI6-9I-S0d"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wag-iS-VM0">
@@ -201,6 +202,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYR-Bt-3iC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="724.63768115942037" y="1375.4464285714284"/>
+        </scene>
+        <!--Sound Clips Table View Controller-->
+        <scene sceneID="uee-A1-cVW">
+            <objects>
+                <tableViewController id="IR5-l0-Z26" customClass="SoundClipsTableViewController" customModule="EasyEdit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="V0C-4v-AiO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SoundCell" id="QRF-Ag-xSf" customClass="SoundTableViewCell" customModule="EasyEdit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QRF-Ag-xSf" id="8VJ-BH-6as">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1Qe-Ws-2cz">
+                                            <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDk-g8-a15">
+                                                    <rect key="frame" x="0.0" y="0.0" width="398" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="1Qe-Ws-2cz" secondAttribute="bottom" id="E3q-9R-g8z"/>
+                                        <constraint firstItem="1Qe-Ws-2cz" firstAttribute="leading" secondItem="8VJ-BH-6as" secondAttribute="leading" constant="8" id="OYQ-7H-NaM"/>
+                                        <constraint firstItem="1Qe-Ws-2cz" firstAttribute="top" secondItem="8VJ-BH-6as" secondAttribute="top" id="hxB-Cc-zAw"/>
+                                        <constraint firstAttribute="trailing" secondItem="1Qe-Ws-2cz" secondAttribute="trailing" constant="8" id="v5R-Vn-7o8"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="soundTitleLabel" destination="PDk-g8-a15" id="Oqz-qr-Lyo"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IR5-l0-Z26" id="gZt-Bm-MKs"/>
+                            <outlet property="delegate" destination="IR5-l0-Z26" id="h1v-5w-7Xj"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="29P-Le-E7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1546" y="1375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JCY-Ev-VUn">

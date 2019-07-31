@@ -111,7 +111,6 @@ class MergeVideoViewController: UIViewController {
 
     func exportDidFinish(_ session: AVAssetExportSession) {
         
-//        activityMonitor.stopAnimating()
         firstAsset = nil
         audioAsset = nil
         
@@ -136,7 +135,7 @@ class MergeVideoViewController: UIViewController {
             }
         }
         
-        // Ensure permission to access Photo Library
+        // Library permission
         if PHPhotoLibrary.authorizationStatus() != .authorized {
             PHPhotoLibrary.requestAuthorization { status in
                 if status == .authorized {
@@ -153,27 +152,36 @@ class MergeVideoViewController: UIViewController {
         if savedPhotosAvailable() {
             VideoHelper.startMediaBrowser(delegate: self, sourceType: .savedPhotosAlbum)
         }
-        //Set first asset to URL passed from delegate. ???
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SoundClipSegue" {
+            let vc = segue.destination as! SoundClipsTableViewController
+            vc.delegate = self
+        }
     }
     
     
     @IBAction func loadAudioAssetButtonTapped(_ sender: Any) {
         
-        let path = Bundle.main.path(forResource: "wow.wav", ofType: nil)!
-        let url = URL(fileURLWithPath: path)
-        self.audioAsset = AVAsset(url: url)
-        let title = "Asset Loaded"
-        let message = "Audio Loaded"
+        //Set this VC as the delegate
+        //SoundTableViewCell.delegate = self
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:nil))
-        self.present(alert, animated: true, completion: nil)
+        
+//        let path = Bundle.main.path(forResource: "wow.wav", ofType: nil)!
+//        let url = URL(fileURLWithPath: path)
+//        self.audioAsset = AVAsset(url: url)
+//        let title = "Asset Loaded"
+//        let message = "Audio Loaded"
+//        
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:nil))
+//        self.present(alert, animated: true, completion: nil)
     }
     
     
     @IBAction func mergeVideoButtonTapped(_ sender: Any) {
         
-//        activityMonitor.startAnimating()
         
         let mixComposition = AVMutableComposition()
         
@@ -299,6 +307,13 @@ extension MergeVideoViewController: MPMediaPickerControllerDelegate {
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension MergeVideoViewController: AssetDelegate {
+    func assetUrlSelected(url: URL) {
+        self.audioAsset = AVAsset(url: url)
+        print("The Url was passed!")
     }
 }
 
