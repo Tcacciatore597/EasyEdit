@@ -20,21 +20,45 @@ class MergeVideoViewController: UIViewController {
     var userSelectedTime: Double?
     var firstAsset: AVAsset?
     var audioAsset: AVAsset?
+    var isPlaying = false
     
     
+    @IBOutlet weak var stopPlayButton: UIButton!
     @IBOutlet weak var timeElapsedLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var videoSlider: UISlider!
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        videoSlider.value = 0
+        stopPlayButton.isHidden = true
+        videoSlider.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         createPlayerView()
+        stopPlayButton.setTitle("Play", for: .normal)
     }
     
-
+    @IBAction func stopPlayButtonTapped(_ sender: Any) {
+        
+        handlePause()
+    }
+    
     @IBAction func sliderValueChanged(_ sender: Any) {
         handleSliderChange()
+    }
+    
+    func handlePause() {
+        if isPlaying {
+            player?.pause()
+            stopPlayButton.setTitle("Play", for: .normal)
+        } else {
+            player?.play()
+            stopPlayButton.setTitle("Pause", for: .normal)
+        }
+        isPlaying.toggle()
     }
     
     func savedPhotosAvailable() -> Bool {
@@ -58,7 +82,7 @@ class MergeVideoViewController: UIViewController {
         playerLayer!.frame = topRect
         playerLayer!.backgroundColor = UIColor.black.cgColor
         self.view!.layer.addSublayer(playerLayer!)
-        player?.play()
+//        player?.play()
         
         player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
 //        player?.removeTimeObserver(self)
@@ -75,7 +99,7 @@ class MergeVideoViewController: UIViewController {
                 let durationSeconds = CMTimeGetSeconds(duration)
                 
                 self.videoSlider.value = Float(seconds / durationSeconds)
-                
+
             }
             
         })
@@ -88,13 +112,14 @@ class MergeVideoViewController: UIViewController {
             let totalSeconds = CMTimeGetSeconds(duration)
             let value = Float64(videoSlider.value) * totalSeconds
             let seekTime = CMTime(value: Int64(value), timescale: 1)
-            player?.seek(to: seekTime)
+            player?.seek(to: seekTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
             self.userSelectedTime = Double(value)
         }
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "currentItem.loadedTimeRanges" {
+            stopPlayButton.isHidden = false
             if let duration = player?.currentItem?.duration {
                 let seconds = CMTimeGetSeconds(duration)
                 let secondsText = Int(seconds) % 60
@@ -105,6 +130,7 @@ class MergeVideoViewController: UIViewController {
                     durationLabel.text = "\(minutesText):\(secondsText)"
 
                 }
+
             }
         }
     }
@@ -164,19 +190,6 @@ class MergeVideoViewController: UIViewController {
     
     @IBAction func loadAudioAssetButtonTapped(_ sender: Any) {
         
-        //Set this VC as the delegate
-        //SoundTableViewCell.delegate = self
-        
-        
-//        let path = Bundle.main.path(forResource: "wow.wav", ofType: nil)!
-//        let url = URL(fileURLWithPath: path)
-//        self.audioAsset = AVAsset(url: url)
-//        let title = "Asset Loaded"
-//        let message = "Audio Loaded"
-//        
-//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:nil))
-//        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -270,45 +283,39 @@ extension MergeVideoViewController: UIImagePickerControllerDelegate {
             else { return }
   
         let avAsset = AVAsset(url: url)
-        let message = "Video loaded"
-            firstAsset = avAsset
-        let alert = UIAlertController(title: "Asset Loaded", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+        firstAsset = avAsset
         videoURL = url
-        
     }
-    
 }
 
 extension MergeVideoViewController: UINavigationControllerDelegate {
     
 }
 
-extension MergeVideoViewController: MPMediaPickerControllerDelegate {
-    
-    func mediaPicker(_ mediaPicker: MPMediaPickerController,
-                     didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-        
-        dismiss(animated: true) {
-            let selectedSongs = mediaItemCollection.items
-            guard let song = selectedSongs.first else { return }
-            
-            let url = song.value(forProperty: MPMediaItemPropertyAssetURL) as? URL
-            self.audioAsset = (url == nil) ? nil : AVAsset(url: url!)
-            let title = (url == nil) ? "Asset Not Available" : "Asset Loaded"
-            let message = (url == nil) ? "Audio Not Loaded" : "Audio Loaded"
-            
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-}
+//extension MergeVideoViewController: MPMediaPickerControllerDelegate {
+//
+//    func mediaPicker(_ mediaPicker: MPMediaPickerController,
+//                     didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+//
+//        dismiss(animated: true) {
+//            let selectedSongs = mediaItemCollection.items
+//            guard let song = selectedSongs.first else { return }
+//
+//            let url = song.value(forProperty: MPMediaItemPropertyAssetURL) as? URL
+//            self.audioAsset = (url == nil) ? nil : AVAsset(url: url!)
+//            let title = (url == nil) ? "Asset Not Available" : "Asset Loaded"
+//            let message = (url == nil) ? "Audio Not Loaded" : "Audio Loaded"
+//
+//            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//    }
+//
+//    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
+//        dismiss(animated: true, completion: nil)
+//    }
+//}
 
 extension MergeVideoViewController: AssetDelegate {
     func assetUrlSelected(url: URL) {

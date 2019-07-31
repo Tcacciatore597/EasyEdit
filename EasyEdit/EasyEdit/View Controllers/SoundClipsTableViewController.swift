@@ -20,6 +20,10 @@ class SoundClipsTableViewController: UITableViewController {
     var chosenSound: URL?
     var delegate: AssetDelegate?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.tableFooterView = UIView()
+    }
 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

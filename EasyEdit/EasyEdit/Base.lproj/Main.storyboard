@@ -77,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8iE-nO-p6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="878" y="246"/>
+            <point key="canvasLocation" x="877" y="423"/>
         </scene>
         <!--Merge Video View Controller-->
         <scene sceneID="CP0-Hd-t9e">
@@ -120,34 +120,44 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="65" translatesAutoresizingMaskIntoConstraints="NO" id="eM8-Ua-1cN">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eM8-Ua-1cN">
                                 <rect key="frame" x="8" y="633.5" width="398" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8C-eC-6ew">
-                                        <rect key="frame" x="0.0" y="0.0" width="38" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8C-eC-6ew">
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="2Wr-iI-4HH">
-                                        <rect key="frame" x="101" y="0.0" width="204.5" height="31"/>
+                                        <rect key="frame" x="52" y="0.0" width="294" height="31"/>
                                         <connections>
                                             <action selector="sliderValueChanged:" destination="oow-Ag-OGK" eventType="valueChanged" id="Vti-wY-m9q"/>
                                         </connections>
                                     </slider>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHv-ER-U7h">
-                                        <rect key="frame" x="368.5" y="0.0" width="29.5" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHv-ER-U7h">
+                                        <rect key="frame" x="352" y="0.0" width="46" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ot-KM-d8V">
+                                <rect key="frame" x="8" y="595.5" width="398" height="30"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="stopPlayButtonTapped:" destination="oow-Ag-OGK" eventType="touchUpInside" id="SO2-u0-uhT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fjx-We-yu7" firstAttribute="top" secondItem="eM8-Ua-1cN" secondAttribute="bottom" constant="16" id="C5Z-gg-bye"/>
                             <constraint firstItem="I7l-l4-1lf" firstAttribute="top" secondItem="fjx-We-yu7" secondAttribute="bottom" constant="8" id="F6h-KD-Dr7"/>
+                            <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="1Ot-KM-d8V" secondAttribute="trailing" constant="8" id="I9r-80-hiN"/>
+                            <constraint firstItem="1Ot-KM-d8V" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="Nfq-UH-s1X"/>
+                            <constraint firstItem="eM8-Ua-1cN" firstAttribute="top" secondItem="1Ot-KM-d8V" secondAttribute="bottom" constant="8" id="RJG-fz-UyG"/>
                             <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="eM8-Ua-1cN" secondAttribute="trailing" constant="8" id="VN7-UM-U6O"/>
                             <constraint firstItem="Je7-CB-5EY" firstAttribute="bottom" secondItem="I7l-l4-1lf" secondAttribute="bottom" constant="16" id="WO2-jG-O1Z"/>
                             <constraint firstItem="I7l-l4-1lf" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="bR8-kQ-yM6"/>
@@ -160,6 +170,7 @@
                     </view>
                     <connections>
                         <outlet property="durationLabel" destination="vHv-ER-U7h" id="Gsc-zv-4i4"/>
+                        <outlet property="stopPlayButton" destination="1Ot-KM-d8V" id="Uy9-Iw-Rix"/>
                         <outlet property="timeElapsedLabel" destination="V8C-eC-6ew" id="EHn-uV-RqO"/>
                         <outlet property="videoSlider" destination="2Wr-iI-4HH" id="B3T-rh-KTg"/>
                     </connections>
@@ -172,16 +183,16 @@
         <scene sceneID="uee-A1-cVW">
             <objects>
                 <tableViewController id="IR5-l0-Z26" customClass="SoundClipsTableViewController" customModule="EasyEdit" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="V0C-4v-AiO">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="V0C-4v-AiO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SoundCell" id="QRF-Ag-xSf" customClass="SoundTableViewCell" customModule="EasyEdit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QRF-Ag-xSf" id="8VJ-BH-6as">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1Qe-Ws-2cz">
