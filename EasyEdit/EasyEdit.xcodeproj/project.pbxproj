@@ -11,7 +11,6 @@
 		4217549822EF537D00F0D689 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4217549622EF537D00F0D689 /* Main.storyboard */; };
 		4217549A22EF537F00F0D689 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4217549922EF537F00F0D689 /* Assets.xcassets */; };
 		4217549D22EF537F00F0D689 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4217549B22EF537F00F0D689 /* LaunchScreen.storyboard */; };
-		421754A522EF552700F0D689 /* PlayVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421754A422EF552700F0D689 /* PlayVideoViewController.swift */; };
 		421754A722EF55E500F0D689 /* VideoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421754A622EF55E500F0D689 /* VideoHelper.swift */; };
 		421754A922EF5E5000F0D689 /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421754A822EF5E5000F0D689 /* RecordVideoViewController.swift */; };
 		421754AD22EF6AAE00F0D689 /* MergeVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421754AC22EF6AAE00F0D689 /* MergeVideoViewController.swift */; };
@@ -31,7 +30,6 @@
 		4217549922EF537F00F0D689 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4217549C22EF537F00F0D689 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4217549E22EF537F00F0D689 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		421754A422EF552700F0D689 /* PlayVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayVideoViewController.swift; sourceTree = "<group>"; };
 		421754A622EF55E500F0D689 /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; };
 		421754A822EF5E5000F0D689 /* RecordVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 		421754AC22EF6AAE00F0D689 /* MergeVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeVideoViewController.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 		429851EB22F208CA000F4D34 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				421754A422EF552700F0D689 /* PlayVideoViewController.swift */,
 				421754A822EF5E5000F0D689 /* RecordVideoViewController.swift */,
 				421754AC22EF6AAE00F0D689 /* MergeVideoViewController.swift */,
 				429851E722F1F960000F4D34 /* SoundClipsTableViewController.swift */,
@@ -204,7 +201,6 @@
 				429851E822F1F960000F4D34 /* SoundClipsTableViewController.swift in Sources */,
 				429851E422F1EFFF000F4D34 /* Sound.swift in Sources */,
 				421754AD22EF6AAE00F0D689 /* MergeVideoViewController.swift in Sources */,
-				421754A522EF552700F0D689 /* PlayVideoViewController.swift in Sources */,
 				429851EA22F20355000F4D34 /* SoundTableViewCell.swift in Sources */,
 				429851E622F1F056000F4D34 /* SoundController.swift in Sources */,
 				4217549322EF537D00F0D689 /* AppDelegate.swift in Sources */,

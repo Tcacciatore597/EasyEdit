@@ -17,7 +17,7 @@ class SoundClipsTableViewController: UITableViewController {
 
     var soundController = SoundController()
     var audioPlayer = AVAudioPlayer()
-    var audioAsset: AVAsset?
+    var chosenSound: URL?
     var delegate: AssetDelegate?
     
 
@@ -38,7 +38,7 @@ class SoundClipsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let sound = soundController.sounds[indexPath.row]
-        delegate?.assetUrlSelected(url: sound.url)
+        chosenSound = sound.url
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: sound.url)
             audioPlayer.prepareToPlay()
@@ -48,7 +48,13 @@ class SoundClipsTableViewController: UITableViewController {
         audioPlayer.play()
     }
     
-
+    @IBAction func doneButtonTappee(_ sender: Any) {
+        guard let chosenSound = chosenSound else { return }
+        delegate?.assetUrlSelected(url: chosenSound)
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
   
 
 }

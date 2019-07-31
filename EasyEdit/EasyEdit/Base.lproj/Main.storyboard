@@ -19,24 +19,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="mel-Te-X1y">
-                                <rect key="frame" x="127.5" y="355" width="159" height="186"/>
+                                <rect key="frame" x="127.5" y="394" width="159" height="108"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfQ-kw-tBI">
-                                        <rect key="frame" x="0.0" y="0.0" width="159" height="30"/>
-                                        <state key="normal" title="Select And Play Video"/>
-                                        <connections>
-                                            <segue destination="c1G-tx-IEi" kind="show" identifier="SelectVideoSegue" id="4ow-sd-jbl"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLE-10-0pj">
-                                        <rect key="frame" x="0.0" y="78" width="159" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="159" height="30"/>
                                         <state key="normal" title="Record and Save Video"/>
                                         <connections>
                                             <segue destination="F7Z-fP-zji" kind="show" identifier="RecordVideoSegue" id="Ecl-QP-gi9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvM-To-bZW">
-                                        <rect key="frame" x="0.0" y="156" width="159" height="30"/>
+                                        <rect key="frame" x="0.0" y="78" width="159" height="30"/>
                                         <state key="normal" title="Create Custom Video"/>
                                         <connections>
                                             <segue destination="oow-Ag-OGK" kind="show" identifier="CreateVideoSegue" id="C7Y-yP-h36"/>
@@ -57,34 +50,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7TA-wr-gv1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-148" y="665"/>
-        </scene>
-        <!--Play Video View Controller-->
-        <scene sceneID="RbI-LT-XNA">
-            <objects>
-                <viewController id="c1G-tx-IEi" customClass="PlayVideoViewController" customModule="EasyEdit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vem-vw-fvM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyA-R1-CvZ">
-                                <rect key="frame" x="171" y="433" width="72" height="30"/>
-                                <state key="normal" title="Play Video"/>
-                                <connections>
-                                    <action selector="playVideoButtonTapped:" destination="c1G-tx-IEi" eventType="touchUpInside" id="jMg-v9-Sod"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="zyA-R1-CvZ" firstAttribute="centerX" secondItem="Vem-vw-fvM" secondAttribute="centerX" id="ArF-DN-kM7"/>
-                            <constraint firstItem="zyA-R1-CvZ" firstAttribute="centerY" secondItem="Vem-vw-fvM" secondAttribute="centerY" id="TlH-TD-iva"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Cby-0l-onK"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0ne-2m-pGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="725" y="-33"/>
         </scene>
         <!--Record Video View Controller-->
         <scene sceneID="Bhu-3z-YDB">
@@ -112,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8iE-nO-p6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="725" y="665"/>
+            <point key="canvasLocation" x="878" y="246"/>
         </scene>
         <!--Merge Video View Controller-->
         <scene sceneID="CP0-Hd-t9e">
@@ -201,9 +166,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYR-Bt-3iC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724.63768115942037" y="1375.4464285714284"/>
+            <point key="canvasLocation" x="877" y="1144"/>
         </scene>
-        <!--Sound Clips Table View Controller-->
+        <!--Select A Sound Clip-->
         <scene sceneID="uee-A1-cVW">
             <objects>
                 <tableViewController id="IR5-l0-Z26" customClass="SoundClipsTableViewController" customModule="EasyEdit" customModuleProvider="target" sceneMemberID="viewController">
@@ -248,10 +213,17 @@
                             <outlet property="delegate" destination="IR5-l0-Z26" id="h1v-5w-7Xj"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Select A Sound Clip" id="PrO-9g-q2N">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="aeI-xf-HoU">
+                            <connections>
+                                <action selector="doneButtonTappee:" destination="IR5-l0-Z26" id="B7M-FX-Rno"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29P-Le-E7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1546" y="1375"/>
+            <point key="canvasLocation" x="1762" y="1144"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JCY-Ev-VUn">
