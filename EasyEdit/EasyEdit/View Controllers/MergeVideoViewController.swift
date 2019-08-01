@@ -247,8 +247,7 @@ class MergeVideoViewController: UIViewController {
         
      
         mergeVideoAndAudio(videoUrl: videoURL!, audioUrl: audioURL!) { (error, url) in
-            
-            print("merge done")
+           print("Merge Done")
         }
 
 }
@@ -301,12 +300,10 @@ class MergeVideoViewController: UIViewController {
                                                                 of: aVideoAssetTrack,
                                                                 at: CMTime.zero)
             
-            //In my case my audio file is longer then video file so i took videoAsset duration
-            //instead of audioAsset duration
             let userCMTime = CMTimeMake(value: self.userSelectedTime, timescale: 1)
 
             try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
-                                                                                duration: aVideoAssetTrack.timeRange.duration),
+                                                                                duration: aAudioAssetTrack.timeRange.duration),
                                                                 of: aAudioAssetTrack,
                                                                 at: userCMTime)
             
