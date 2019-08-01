@@ -10,74 +10,66 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="lCO-cK-yrE">
             <objects>
-                <viewController id="LBh-7l-b5t" sceneMemberID="viewController">
+                <viewController id="LBh-7l-b5t" customClass="HomeViewController" customModule="EasyEdit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nFI-hO-GwZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="mel-Te-X1y">
-                                <rect key="frame" x="127.5" y="394" width="159" height="108"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Easy Edit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMC-WH-Bsc">
+                                <rect key="frame" x="8" y="96" width="398" height="55.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="48"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="mel-Te-X1y">
+                                <rect key="frame" x="105.5" y="746" width="203" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLE-10-0pj">
-                                        <rect key="frame" x="0.0" y="0.0" width="159" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="203" height="32"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="17"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" title="Record and Save Video"/>
                                         <connections>
-                                            <segue destination="F7Z-fP-zji" kind="show" identifier="RecordVideoSegue" id="Ecl-QP-gi9"/>
+                                            <action selector="recordVideoButtonTapped:" destination="LBh-7l-b5t" eventType="touchUpInside" id="uTf-wk-7z8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvM-To-bZW">
-                                        <rect key="frame" x="0.0" y="78" width="159" height="30"/>
+                                        <rect key="frame" x="0.0" y="68" width="203" height="32"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="17"/>
                                         <state key="normal" title="Create Custom Video"/>
                                         <connections>
                                             <segue destination="oow-Ag-OGK" kind="show" identifier="CreateVideoSegue" id="C7Y-yP-h36"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="rvM-To-bZW" firstAttribute="height" secondItem="SLE-10-0pj" secondAttribute="height" id="JR4-iq-9B5"/>
+                                    <constraint firstItem="rvM-To-bZW" firstAttribute="width" secondItem="SLE-10-0pj" secondAttribute="width" id="pig-OA-wi2"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="mel-Te-X1y" firstAttribute="centerY" secondItem="nFI-hO-GwZ" secondAttribute="centerY" id="HYm-dS-17g"/>
-                            <constraint firstItem="mel-Te-X1y" firstAttribute="centerX" secondItem="nFI-hO-GwZ" secondAttribute="centerX" id="uFh-uH-scm"/>
+                            <constraint firstItem="YMC-WH-Bsc" firstAttribute="leading" secondItem="FYx-7M-D4M" secondAttribute="leading" constant="8" id="6eF-Xh-Bsa"/>
+                            <constraint firstItem="YMC-WH-Bsc" firstAttribute="top" secondItem="FYx-7M-D4M" secondAttribute="top" constant="8" id="RTw-q6-zTr"/>
+                            <constraint firstItem="mel-Te-X1y" firstAttribute="centerX" secondItem="nFI-hO-GwZ" secondAttribute="centerX" id="igm-mS-Qry"/>
+                            <constraint firstItem="FYx-7M-D4M" firstAttribute="bottom" secondItem="mel-Te-X1y" secondAttribute="bottom" constant="16" id="teJ-ue-lMY"/>
+                            <constraint firstItem="FYx-7M-D4M" firstAttribute="trailing" secondItem="YMC-WH-Bsc" secondAttribute="trailing" constant="8" id="wMJ-fP-Nqn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FYx-7M-D4M"/>
                     </view>
                     <navigationItem key="navigationItem" id="MgS-NQ-bJc"/>
+                    <connections>
+                        <outlet property="createVideoButton" destination="rvM-To-bZW" id="H3c-4W-OlE"/>
+                        <outlet property="recordVideoButton" destination="SLE-10-0pj" id="0jE-gO-0ah"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7TA-wr-gv1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-148" y="665"/>
-        </scene>
-        <!--Record Video View Controller-->
-        <scene sceneID="Bhu-3z-YDB">
-            <objects>
-                <viewController id="F7Z-fP-zji" customClass="RecordVideoViewController" customModule="EasyEdit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MGs-HQ-swB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsv-Xb-nlW">
-                                <rect key="frame" x="161" y="433" width="92" height="30"/>
-                                <state key="normal" title="Record Video"/>
-                                <connections>
-                                    <action selector="recordVideoButtonTapped:" destination="F7Z-fP-zji" eventType="touchUpInside" id="pIF-mj-FJ7"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Bsv-Xb-nlW" firstAttribute="centerX" secondItem="MGs-HQ-swB" secondAttribute="centerX" id="7E1-Yl-rYy"/>
-                            <constraint firstItem="Bsv-Xb-nlW" firstAttribute="centerY" secondItem="MGs-HQ-swB" secondAttribute="centerY" id="fIT-u7-lYw"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="yPj-87-mPT"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8iE-nO-p6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="877" y="423"/>
         </scene>
         <!--Merge Video View Controller-->
         <scene sceneID="CP0-Hd-t9e">
@@ -179,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYR-Bt-3iC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="1144"/>
+            <point key="canvasLocation" x="768" y="665"/>
         </scene>
         <!--Select A Sound Clip-->
         <scene sceneID="uee-A1-cVW">
@@ -198,10 +190,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1Qe-Ws-2cz">
-                                            <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
+                                            <rect key="frame" x="8" y="0.0" width="398" height="79.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDk-g8-a15">
-                                                    <rect key="frame" x="0.0" y="0.0" width="398" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="398" height="79.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -236,7 +228,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29P-Le-E7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1762" y="1144"/>
+            <point key="canvasLocation" x="1625" y="665"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JCY-Ev-VUn">

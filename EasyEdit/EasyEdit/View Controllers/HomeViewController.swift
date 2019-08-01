@@ -1,22 +1,58 @@
 //
-//  RecordVideoViewController.swift
+//  HomeViewController.swift
 //  EasyEdit
 //
-//  Created by Thomas Cacciatore on 7/29/19.
+//  Created by Thomas Cacciatore on 8/1/19.
 //  Copyright © 2019 Thomas Cacciatore. All rights reserved.
 //
 
 import UIKit
 import MobileCoreServices
 
+class HomeViewController: UIViewController {
 
-class RecordVideoViewController: UIViewController {
+    @IBOutlet weak var recordVideoButton: UIButton!
     
-
+    @IBOutlet weak var createVideoButton: UIButton!
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        assignbackground()
+        setAppearance()
+       
+    }
     
     @IBAction func recordVideoButtonTapped(_ sender: Any) {
         
         VideoHelper.startMediaBrowser(delegate: self, sourceType: .camera)
+
+    }
+    
+    func assignbackground(){
+        let background = UIImage(named: "filmCutImage")
+        
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIView.ContentMode.scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubviewToBack(imageView)
+    }
+    
+    func setAppearance() {
+        recordVideoButton.layer.borderColor = UIColor.black.cgColor
+        recordVideoButton.layer.borderWidth = 1
+        recordVideoButton.layer.cornerRadius = 12
+        recordVideoButton.backgroundColor = .lightGray
+        
+        createVideoButton.layer.borderColor = UIColor.black.cgColor
+        createVideoButton.layer.borderWidth = 1
+        createVideoButton.layer.cornerRadius = 12
+        createVideoButton.backgroundColor = .lightGray
         
     }
     
@@ -30,10 +66,10 @@ class RecordVideoViewController: UIViewController {
         present(alert, animated: true, completion: nil)
         
     }
-    
+
 }
 
-extension RecordVideoViewController: UIImagePickerControllerDelegate {
+extension HomeViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -54,11 +90,9 @@ extension RecordVideoViewController: UIImagePickerControllerDelegate {
             #selector(video(_:didFinishSavingWithError:contextInfo:)),
             nil)
         
-        self.navigationController?.popViewController(animated: true)
     }
-    
-    
 }
 
-extension RecordVideoViewController: UINavigationControllerDelegate {
+extension HomeViewController: UINavigationControllerDelegate {
+
 }
