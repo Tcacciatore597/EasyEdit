@@ -24,8 +24,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="mel-Te-X1y">
-                                <rect key="frame" x="105.5" y="746" width="203" height="100"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="mel-Te-X1y">
+                                <rect key="frame" x="105.5" y="702" width="203" height="144"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLE-10-0pj">
                                         <rect key="frame" x="0.0" y="0.0" width="203" height="32"/>
@@ -36,8 +36,16 @@
                                             <action selector="recordVideoButtonTapped:" destination="LBh-7l-b5t" eventType="touchUpInside" id="uTf-wk-7z8"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cs-F4-cSx">
+                                        <rect key="frame" x="0.0" y="56" width="203" height="32"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="17"/>
+                                        <state key="normal" title="Record and Save Audio"/>
+                                        <connections>
+                                            <action selector="recordTapped:" destination="LBh-7l-b5t" eventType="touchUpInside" id="w4h-Ax-mQ6"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvM-To-bZW">
-                                        <rect key="frame" x="0.0" y="68" width="203" height="32"/>
+                                        <rect key="frame" x="0.0" y="112" width="203" height="32"/>
                                         <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="17"/>
                                         <state key="normal" title="Create Custom Video"/>
                                         <connections>
@@ -47,6 +55,8 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="rvM-To-bZW" firstAttribute="height" secondItem="SLE-10-0pj" secondAttribute="height" id="JR4-iq-9B5"/>
+                                    <constraint firstItem="0cs-F4-cSx" firstAttribute="width" secondItem="SLE-10-0pj" secondAttribute="width" id="aEr-Td-zKZ"/>
+                                    <constraint firstItem="0cs-F4-cSx" firstAttribute="height" secondItem="SLE-10-0pj" secondAttribute="height" id="lZH-Ej-5cf"/>
                                     <constraint firstItem="rvM-To-bZW" firstAttribute="width" secondItem="SLE-10-0pj" secondAttribute="width" id="pig-OA-wi2"/>
                                 </constraints>
                             </stackView>
@@ -64,6 +74,7 @@
                     <navigationItem key="navigationItem" id="MgS-NQ-bJc"/>
                     <connections>
                         <outlet property="createVideoButton" destination="rvM-To-bZW" id="H3c-4W-OlE"/>
+                        <outlet property="recordButton" destination="0cs-F4-cSx" id="JxY-it-MRf"/>
                         <outlet property="recordVideoButton" destination="SLE-10-0pj" id="0jE-gO-0ah"/>
                     </connections>
                 </viewController>
