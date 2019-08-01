@@ -206,7 +206,11 @@ class MergeVideoViewController: UIViewController {
                 let message = success ? "Video saved to Photo Library" : "Failed to save video"
                 
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                    DispatchQueue.main.async {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                }))
                 self.present(alert, animated: true, completion: nil)
             }
         }
