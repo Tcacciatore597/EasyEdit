@@ -106,7 +106,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use slider to insert audio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjx-We-yu7">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adjust slider for sound clip placement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjx-We-yu7">
                                 <rect key="frame" x="8" y="679.5" width="398" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -162,7 +162,9 @@
                     </view>
                     <connections>
                         <outlet property="durationLabel" destination="vHv-ER-U7h" id="Gsc-zv-4i4"/>
+                        <outlet property="instructionLabel" destination="fjx-We-yu7" id="qIB-ib-vaC"/>
                         <outlet property="loadAudioButton" destination="Zw1-OF-kJy" id="cqh-fv-L6u"/>
+                        <outlet property="loadVideoButton" destination="LTK-rp-o4t" id="bM7-iP-nuh"/>
                         <outlet property="mergeButton" destination="Wag-iS-VM0" id="8R2-70-oT3"/>
                         <outlet property="stopPlayButton" destination="1Ot-KM-d8V" id="Uy9-Iw-Rix"/>
                         <outlet property="timeElapsedLabel" destination="V8C-eC-6ew" id="EHn-uV-RqO"/>
@@ -194,7 +196,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDk-g8-a15">
                                                     <rect key="frame" x="0.0" y="0.0" width="398" height="79.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

@@ -24,6 +24,8 @@ class MergeVideoViewController: UIViewController {
     var isPlaying = false
     
     
+    @IBOutlet weak var instructionLabel: UILabel!
+    @IBOutlet weak var loadVideoButton: UIButton!
     @IBOutlet weak var stopPlayButton: UIButton!
     @IBOutlet weak var timeElapsedLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
@@ -34,11 +36,16 @@ class MergeVideoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setAppearance()
         videoSlider.value = 0
         stopPlayButton.isHidden = true
         videoSlider.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         mergeButton.isHidden = true
         loadAudioButton.isHidden = true
+        timeElapsedLabel.isHidden = true
+        durationLabel.isHidden = true
+        videoSlider.isHidden = true
+        instructionLabel.text = "Start by choosing a video"
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -46,10 +53,35 @@ class MergeVideoViewController: UIViewController {
         createPlayerView()
         stopPlayButton.setTitle("Play", for: .normal)
         if firstAsset != nil && audioAsset != nil {
+            durationLabel.isHidden = false
+            videoSlider.isHidden = false
             mergeButton.isHidden = false
+            timeElapsedLabel.isHidden = false
+            instructionLabel.text = "Adjust slider for sound clip placement"
         } else if firstAsset != nil {
+            instructionLabel.text = "Now choose an audio clip"
+            durationLabel.isHidden = false
+            timeElapsedLabel.isHidden = false
+            videoSlider.isHidden = false
             loadAudioButton.isHidden = false
         }
+    }
+    
+    func setAppearance() {
+        loadAudioButton.layer.borderColor = UIColor.black.cgColor
+        loadAudioButton.layer.borderWidth = 1
+        loadAudioButton.layer.cornerRadius = 12
+        loadAudioButton.backgroundColor = .lightGray
+        
+        mergeButton.layer.borderColor = UIColor.black.cgColor
+        mergeButton.layer.borderWidth = 1
+        mergeButton.layer.cornerRadius = 12
+        mergeButton.backgroundColor = .lightGray
+        
+        loadVideoButton.layer.borderColor = UIColor.black.cgColor
+        loadVideoButton.layer.borderWidth = 1
+        loadVideoButton.layer.cornerRadius = 12
+        loadVideoButton.backgroundColor = .lightGray
     }
     
     @IBAction func stopPlayButtonTapped(_ sender: Any) {
@@ -168,7 +200,7 @@ class MergeVideoViewController: UIViewController {
             }) { saved, error in
                 let success = saved && (error == nil)
                 let title = success ? "Success" : "Error"
-                let message = success ? "Video saved" : "Failed to save video"
+                let message = success ? "Video saved to Photo Library" : "Failed to save video"
                 
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
