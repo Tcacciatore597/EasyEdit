@@ -27,6 +27,7 @@ class MergeVideoViewController: UIViewController {
     var isPlaying = false
     
     
+    @IBOutlet weak var centerLabel: UILabel!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var loadVideoButton: UIButton!
     @IBOutlet weak var stopPlayButton: UIButton!
@@ -48,8 +49,7 @@ class MergeVideoViewController: UIViewController {
         timeElapsedLabel.isHidden = true
         durationLabel.isHidden = true
         videoSlider.isHidden = true
-        instructionLabel.text = "Start by choosing a video"
-        
+        instructionLabel.isHidden = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -60,9 +60,13 @@ class MergeVideoViewController: UIViewController {
             videoSlider.isHidden = false
             mergeButton.isHidden = false
             timeElapsedLabel.isHidden = false
+            instructionLabel.isHidden = false
             instructionLabel.text = "Adjust slider for sound clip placement"
         } else if firstAsset != nil {
+            centerLabel.isHidden = true
+            instructionLabel.isHidden = false
             instructionLabel.text = "Now choose an audio clip"
+            loadVideoButton.isHidden = true
             durationLabel.isHidden = false
             timeElapsedLabel.isHidden = false
             videoSlider.isHidden = false
