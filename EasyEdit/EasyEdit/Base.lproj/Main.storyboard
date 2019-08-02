@@ -169,11 +169,26 @@
                                     <constraint firstItem="LTK-rp-o4t" firstAttribute="height" secondItem="WmY-uO-loi" secondAttribute="height" id="ziL-Or-bsG"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Easy Edit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cp-TZ-oBT">
+                                <rect key="frame" x="8" y="96" width="398" height="55.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="48"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tck-dO-Yey">
+                                <rect key="frame" x="8" y="159.5" width="398" height="132.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="tck-dO-Yey" secondAttribute="height" multiplier="3:1" id="PiZ-to-oQo"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="tck-dO-Yey" firstAttribute="top" secondItem="9cp-TZ-oBT" secondAttribute="bottom" constant="8" id="1T5-wj-6dj"/>
+                            <constraint firstItem="tck-dO-Yey" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="7Tc-Pf-xCW"/>
                             <constraint firstItem="fjx-We-yu7" firstAttribute="top" secondItem="eM8-Ua-1cN" secondAttribute="bottom" constant="16" id="C5Z-gg-bye"/>
                             <constraint firstItem="I7l-l4-1lf" firstAttribute="top" secondItem="fjx-We-yu7" secondAttribute="bottom" constant="8" id="F6h-KD-Dr7"/>
+                            <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="tck-dO-Yey" secondAttribute="trailing" constant="8" id="HA1-sV-Vi3"/>
                             <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="1Ot-KM-d8V" secondAttribute="trailing" constant="8" id="I9r-80-hiN"/>
                             <constraint firstItem="NHI-Rz-Zpm" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="JiG-GR-ur2"/>
                             <constraint firstItem="1Ot-KM-d8V" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="Nfq-UH-s1X"/>
@@ -182,24 +197,29 @@
                             <constraint firstItem="eM8-Ua-1cN" firstAttribute="top" secondItem="1Ot-KM-d8V" secondAttribute="bottom" constant="8" id="RJG-fz-UyG"/>
                             <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="eM8-Ua-1cN" secondAttribute="trailing" constant="8" id="VN7-UM-U6O"/>
                             <constraint firstItem="Je7-CB-5EY" firstAttribute="bottom" secondItem="I7l-l4-1lf" secondAttribute="bottom" constant="16" id="WO2-jG-O1Z"/>
+                            <constraint firstItem="9cp-TZ-oBT" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="ZjS-5K-Ov5"/>
+                            <constraint firstItem="9cp-TZ-oBT" firstAttribute="top" secondItem="Je7-CB-5EY" secondAttribute="top" constant="8" id="aAE-qf-aDF"/>
                             <constraint firstItem="I7l-l4-1lf" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="bR8-kQ-yM6"/>
                             <constraint firstItem="NHI-Rz-Zpm" firstAttribute="centerY" secondItem="aN3-eM-GN0" secondAttribute="centerY" id="gaD-9G-XR2"/>
                             <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="I7l-l4-1lf" secondAttribute="trailing" constant="8" id="npo-IK-riu"/>
                             <constraint firstItem="fjx-We-yu7" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="qUM-fU-VWU"/>
                             <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="fjx-We-yu7" secondAttribute="trailing" constant="8" id="u8J-Sn-zm4"/>
                             <constraint firstItem="eM8-Ua-1cN" firstAttribute="leading" secondItem="Je7-CB-5EY" secondAttribute="leading" constant="8" id="ueU-PV-6sW"/>
+                            <constraint firstItem="Je7-CB-5EY" firstAttribute="trailing" secondItem="9cp-TZ-oBT" secondAttribute="trailing" constant="8" id="wgg-t2-8sS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Je7-CB-5EY"/>
                     </view>
                     <connections>
                         <outlet property="centerLabel" destination="WmY-uO-loi" id="QuR-iN-qyQ"/>
                         <outlet property="durationLabel" destination="vHv-ER-U7h" id="Gsc-zv-4i4"/>
+                        <outlet property="imageView" destination="tck-dO-Yey" id="c6a-mM-s9R"/>
                         <outlet property="instructionLabel" destination="fjx-We-yu7" id="qIB-ib-vaC"/>
                         <outlet property="loadAudioButton" destination="Zw1-OF-kJy" id="cqh-fv-L6u"/>
                         <outlet property="loadVideoButton" destination="LTK-rp-o4t" id="bM7-iP-nuh"/>
                         <outlet property="mergeButton" destination="Wag-iS-VM0" id="8R2-70-oT3"/>
                         <outlet property="stopPlayButton" destination="1Ot-KM-d8V" id="Uy9-Iw-Rix"/>
                         <outlet property="timeElapsedLabel" destination="V8C-eC-6ew" id="EHn-uV-RqO"/>
+                        <outlet property="titleLabel" destination="9cp-TZ-oBT" id="NsO-QZ-8rq"/>
                         <outlet property="videoSlider" destination="2Wr-iI-4HH" id="B3T-rh-KTg"/>
                     </connections>
                 </viewController>
