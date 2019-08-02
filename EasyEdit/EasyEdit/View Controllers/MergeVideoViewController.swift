@@ -97,6 +97,8 @@ class MergeVideoViewController: UIViewController {
         loadVideoButton.layer.borderWidth = 1
         loadVideoButton.layer.cornerRadius = 12
         loadVideoButton.backgroundColor = .lightGray
+        
+        stopPlayButton.setImage(UIImage(named: "play"), for: .normal)
     }
     
     @IBAction func stopPlayButtonTapped(_ sender: Any) {
@@ -111,10 +113,12 @@ class MergeVideoViewController: UIViewController {
     func handlePause() {
         if isPlaying {
             player?.pause()
+            stopPlayButton.setImage(UIImage(named: "play"), for: .normal)
             stopPlayButton.setTitle("Play", for: .normal)
         } else {
             player?.play()
             stopPlayButton.setTitle("Pause", for: .normal)
+            stopPlayButton.setImage(UIImage(named: "pause"), for: .normal)
         }
         isPlaying.toggle()
     }
