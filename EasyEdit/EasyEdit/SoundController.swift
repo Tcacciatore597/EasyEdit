@@ -19,6 +19,11 @@ class SoundController {
     ]
     
     func saveRecordedAudio(url: URL) {
-        SoundController.shared.sounds.append(Sound(title: "New Recording", url: url))
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.dateFormat = "MM-dd-yyyy hh:mm a"
+        let dateText = dateFormatter.string(from: now)
+        SoundController.shared.sounds.append(Sound(title: "New Recording: \(dateText)", url: url))
     }
 }
