@@ -15,7 +15,7 @@ protocol AssetDelegate {
 
 class SoundClipsTableViewController: UITableViewController {
 
-    var soundController = SoundController()
+   
     var audioPlayer = AVAudioPlayer()
     var chosenSound: URL?
     var delegate: AssetDelegate?
@@ -23,6 +23,10 @@ class SoundClipsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
 

@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate {
     
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
-    var soundController = SoundController()
+//    var soundController = SoundController()
     var audioURL: URL?
     
     override func viewDidLoad() {
@@ -66,6 +66,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate {
             audioRecorder.delegate = self
             audioRecorder.record()
             recordButton.setTitle("Tap to Stop", for: .normal)
+            SoundController.shared.removeOldRecording()
             SoundController.shared.saveRecordedAudio(url: audioRecorder.url)
 
             
