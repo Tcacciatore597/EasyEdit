@@ -312,19 +312,27 @@ class MergeVideoViewController: UIViewController {
         mutableCompositionVideoTrack.append(compositionAddVideo!)
         mutableCompositionAudioTrack.append(compositionAddAudio!)
         mutableCompositionAudioOfVideoTrack.append(compositionAddAudioOfVideo)
-        
+        let userCMTime = CMTimeMake(value: self.userSelectedTime, timescale: 1)
         do {
+            if aVideoAsset.duration < aAudioAsset.duration {
+                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: aVideoAsset.duration), of: aAudioAssetTrack, at: CMTime.zero)
+                
+            } else if (aVideoAsset.duration - userCMTime) < aAudioAsset.duration {
+                let newAudioDuration = aVideoAsset.duration - userCMTime
+                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: newAudioDuration), of:aAudioAssetTrack, at: userCMTime)
+            } else {
+                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+                                duration: aAudioAssetTrack.timeRange.duration),
+                of: aAudioAssetTrack,
+                at: userCMTime)
+            }
             try mutableCompositionVideoTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
                                                                                 duration: aVideoAssetTrack.timeRange.duration),
                                                                 of: aVideoAssetTrack,
                                                                 at: CMTime.zero)
             
-            let userCMTime = CMTimeMake(value: self.userSelectedTime, timescale: 1)
 
-            try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
-                                                                                duration: aAudioAssetTrack.timeRange.duration),
-                                                                of: aAudioAssetTrack,
-                                                                at: userCMTime)
+            
             
             // adding audio (of the video if exists) asset to the final composition
             if let aAudioOfVideoAssetTrack = aAudioOfVideoAssetTrack {
@@ -338,10 +346,8 @@ class MergeVideoViewController: UIViewController {
         }
         
         // Exporting
-        let savePathUrl: URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mp4")
-        do { // delete old video
-            try FileManager.default.removeItem(at: savePathUrl)
-        } catch { print(error.localizedDescription) }
+        
+        
         
 
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory,
@@ -354,6 +360,13 @@ class MergeVideoViewController: UIViewController {
         dateFormatter.timeStyle = .short
         let date = dateFormatter.string(from: Date())
         let url = documentDirectory.appendingPathComponent("mergeVideo-\(date).mov")
+        
+        
+        let savePathUrl: URL = url
+        do { // delete old video
+            try FileManager.default.removeItem(at: savePathUrl)
+            print("Old video Deleted.")
+        } catch { print(error.localizedDescription) }
         
         guard let exporter = AVAssetExportSession(asset: mixComposition,
                                                   presetName: AVAssetExportPresetHighestQuality) else {
