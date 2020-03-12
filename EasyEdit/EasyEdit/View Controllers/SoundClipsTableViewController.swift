@@ -15,7 +15,7 @@ protocol AssetDelegate {
 
 class SoundClipsTableViewController: UITableViewController {
 
-    var soundController = SoundController()
+   
     var audioPlayer = AVAudioPlayer()
     var chosenSound: URL?
     var delegate: AssetDelegate?
@@ -24,16 +24,20 @@ class SoundClipsTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return soundController.sounds.count
+        return SoundController.shared.sounds.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SoundCell", for: indexPath) as? SoundTableViewCell else { fatalError() }
-        let sound = soundController.sounds[indexPath.row]
+        let sound = SoundController.shared.sounds[indexPath.row]
         cell.sound = sound
         
         return cell
@@ -41,7 +45,7 @@ class SoundClipsTableViewController: UITableViewController {
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let sound = soundController.sounds[indexPath.row]
+        let sound = SoundController.shared.sounds[indexPath.row]
         chosenSound = sound.url
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: sound.url)

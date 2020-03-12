@@ -11,12 +11,15 @@ import AVFoundation
 import MobileCoreServices
 import MediaPlayer
 import Photos
+import AVKit
+import AssetsLibrary
 
 class MergeVideoViewController: UIViewController {
     
     var playerLayer: AVPlayerLayer?
     var player: AVPlayer?
     var videoURL: URL?
+    var audioURL: URL?
     var userSelectedTime: Int64 = 0
     var userTimeScale: Int32 = 0
     var firstAsset: AVAsset?
@@ -24,6 +27,9 @@ class MergeVideoViewController: UIViewController {
     var isPlaying = false
     
     
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var centerLabel: UILabel!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var loadVideoButton: UIButton!
     @IBOutlet weak var stopPlayButton: UIButton!
@@ -45,7 +51,8 @@ class MergeVideoViewController: UIViewController {
         timeElapsedLabel.isHidden = true
         durationLabel.isHidden = true
         videoSlider.isHidden = true
-        instructionLabel.text = "Start by choosing a video"
+        instructionLabel.isHidden = true
+        imageView.image = UIImage(named: "filmImage")
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -57,13 +64,21 @@ class MergeVideoViewController: UIViewController {
             videoSlider.isHidden = false
             mergeButton.isHidden = false
             timeElapsedLabel.isHidden = false
+            instructionLabel.isHidden = false
+            titleLabel.isHidden = true
+            imageView.isHidden = true
             instructionLabel.text = "Adjust slider for sound clip placement"
         } else if firstAsset != nil {
+            centerLabel.isHidden = true
+            instructionLabel.isHidden = false
             instructionLabel.text = "Now choose an audio clip"
+            loadVideoButton.isHidden = true
             durationLabel.isHidden = false
             timeElapsedLabel.isHidden = false
             videoSlider.isHidden = false
             loadAudioButton.isHidden = false
+            titleLabel.isHidden = true
+            imageView.isHidden = true
         }
     }
     
@@ -82,6 +97,8 @@ class MergeVideoViewController: UIViewController {
         loadVideoButton.layer.borderWidth = 1
         loadVideoButton.layer.cornerRadius = 12
         loadVideoButton.backgroundColor = .lightGray
+        
+        stopPlayButton.setImage(UIImage(named: "play"), for: .normal)
     }
     
     @IBAction func stopPlayButtonTapped(_ sender: Any) {
@@ -96,10 +113,12 @@ class MergeVideoViewController: UIViewController {
     func handlePause() {
         if isPlaying {
             player?.pause()
+            stopPlayButton.setImage(UIImage(named: "play"), for: .normal)
             stopPlayButton.setTitle("Play", for: .normal)
         } else {
             player?.play()
             stopPlayButton.setTitle("Pause", for: .normal)
+            stopPlayButton.setImage(UIImage(named: "pause"), for: .normal)
         }
         isPlaying.toggle()
     }
@@ -201,10 +220,13 @@ class MergeVideoViewController: UIViewController {
                 let success = saved && (error == nil)
                 let title = success ? "Success" : "Error"
                 let message = success ? "Video saved to Photo Library" : "Failed to save video"
-                
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
         
@@ -243,92 +265,136 @@ class MergeVideoViewController: UIViewController {
     @IBAction func mergeVideoButtonTapped(_ sender: Any) {
         
      
+        mergeVideoAndAudio(videoUrl: videoURL!, audioUrl: audioURL!) { (error, url) in
+           print("Merge Done")
+        }
+
+}
+    func mergeVideoAndAudio(videoUrl: URL,
+                            audioUrl: URL,
+                            shouldFlipHorizontally: Bool = false,
+                            completion: @escaping (_ error: Error?, _ url: URL?) -> Void) {
+        
         let mixComposition = AVMutableComposition()
-
-        guard
-            let firstTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
-                                                            preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-            else {
-                return
-            }
-        guard let firstAsset = firstAsset else { return }
-        do {
-            try firstTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: firstAsset.duration),
-                                           of: (firstAsset.tracks(withMediaType: AVMediaType.video)[0]),
-                                           at: CMTime.zero)
-
-        } catch {
-            print("Failed to load first track")
-            return
-        }
-
-        let mainInstruction = AVMutableVideoCompositionInstruction()
-        mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero,
-                                                    duration: firstAsset.duration)
-
-        let firstInstruction = VideoHelper.videoCompositionInstruction(firstTrack, asset: firstAsset)
-
-        mainInstruction.layerInstructions = [firstInstruction]
-        let mainComposition = AVMutableVideoComposition()
-        mainComposition.instructions = [mainInstruction]
-        mainComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
-        mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-
+        var mutableCompositionVideoTrack = [AVMutableCompositionTrack]()
+        var mutableCompositionAudioTrack = [AVMutableCompositionTrack]()
+        var mutableCompositionAudioOfVideoTrack = [AVMutableCompositionTrack]()
+        
+        //start merge
+        
+        let aVideoAsset = AVAsset(url: videoUrl)
+        let aAudioAsset = AVAsset(url: audioUrl)
+        
+        let compositionAddVideo = mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
+                                                                 preferredTrackID: kCMPersistentTrackID_Invalid)
+        
+        let compositionAddAudio = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio,
+                                                                 preferredTrackID: kCMPersistentTrackID_Invalid)
+        
+        let compositionAddAudioOfVideo = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio,
+                                                                        preferredTrackID: kCMPersistentTrackID_Invalid)!
+        
+        let aVideoAssetTrack: AVAssetTrack = aVideoAsset.tracks(withMediaType: AVMediaType.video)[0]
+        let aAudioOfVideoAssetTrack: AVAssetTrack? = aVideoAsset.tracks(withMediaType: AVMediaType.audio).first
+        let aAudioAssetTrack: AVAssetTrack = aAudioAsset.tracks(withMediaType: AVMediaType.audio)[0]
+        
+        // Default must have tranformation
+//        compositionAddVideo?.preferredTransform = aVideoAssetTrack.preferredTransform
+//
+//        if shouldFlipHorizontally {
+//            // Flip video horizontally
+//            var frontalTransform: CGAffineTransform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+//            frontalTransform = frontalTransform.translatedBy(x: -aVideoAssetTrack.naturalSize.width, y: 0.0)
+//            frontalTransform = frontalTransform.translatedBy(x: 0.0, y: -aVideoAssetTrack.naturalSize.width)
+//            compositionAddVideo?.preferredTransform = frontalTransform
+//        }
+        
+        mutableCompositionVideoTrack.append(compositionAddVideo!)
+        mutableCompositionAudioTrack.append(compositionAddAudio!)
+        mutableCompositionAudioOfVideoTrack.append(compositionAddAudioOfVideo)
         let userCMTime = CMTimeMake(value: self.userSelectedTime, timescale: 1)
-        if let loadedAudioAsset = audioAsset {
-            guard let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0) else { return }
-            do {
+        do {
+            if aVideoAsset.duration < aAudioAsset.duration {
+                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: aVideoAsset.duration), of: aAudioAssetTrack, at: CMTime.zero)
                 
-                if firstAsset.duration < loadedAudioAsset.duration {
-                    print("Video too short, audio starts at 0")
-                    try audioTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: firstAsset.duration), of: loadedAudioAsset.tracks(withMediaType: AVMediaType.audio)[0], at: CMTime.zero)
-                } else if (firstAsset.duration - userCMTime) < loadedAudioAsset.duration {
-                    //if the audio clip is inserted at a point where the video clip will end before the audio.
-                    print("Audio inserted at point where video ends early.")
-                    let newAudioDuration = firstAsset.duration - userCMTime
-                    try audioTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: newAudioDuration), of: loadedAudioAsset.tracks(withMediaType: AVMediaType.audio)[0], at: userCMTime)
-                } else {
-                    print("Normal case where it works as intended")
-                try audioTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
-                                                                duration: loadedAudioAsset.duration),
-                                                of: loadedAudioAsset.tracks(withMediaType: AVMediaType.audio)[0] ,
-                                                at: CMTimeMake(value: self.userSelectedTime, timescale: 1))
-                //Change above code at: CMTime to adjust when the audio is played.
-                }
-            } catch {
-                print("Failed to load Audio track")
+            } else if (aVideoAsset.duration - userCMTime) < aAudioAsset.duration {
+                let newAudioDuration = aVideoAsset.duration - userCMTime
+                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: newAudioDuration), of:aAudioAssetTrack, at: userCMTime)
+            } else {
+                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+                                duration: aAudioAssetTrack.timeRange.duration),
+                of: aAudioAssetTrack,
+                at: userCMTime)
             }
+            try mutableCompositionVideoTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+                                                                                duration: aVideoAssetTrack.timeRange.duration),
+                                                                of: aVideoAssetTrack,
+                                                                at: CMTime.zero)
+            
+
+            
+            
+            // adding audio (of the video if exists) asset to the final composition
+            if let aAudioOfVideoAssetTrack = aAudioOfVideoAssetTrack {
+                try mutableCompositionAudioOfVideoTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+                                                                                           duration: aVideoAssetTrack.timeRange.duration),
+                                                                           of: aAudioOfVideoAssetTrack,
+                                                                           at: CMTime.zero)
+            }
+        } catch {
+            print(error.localizedDescription)
         }
+        
+        // Exporting
+        
+        
+        
 
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory,
                                                                in: .userDomainMask).first else {
                                                                 return
         }
-
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
         let date = dateFormatter.string(from: Date())
         let url = documentDirectory.appendingPathComponent("mergeVideo-\(date).mov")
-
+        
+        
+        let savePathUrl: URL = url
+        do { // delete old video
+            try FileManager.default.removeItem(at: savePathUrl)
+            print("Old video Deleted.")
+        } catch { print(error.localizedDescription) }
+        
         guard let exporter = AVAssetExportSession(asset: mixComposition,
                                                   presetName: AVAssetExportPresetHighestQuality) else {
                                                     return
         }
+        
+        let mainInstruction = AVMutableVideoCompositionInstruction()
+        mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero,
+                                                    duration: aVideoAsset.duration)
 
+        let firstInstruction = VideoHelper.videoCompositionInstruction(mutableCompositionVideoTrack.first!, asset: aVideoAsset)
+
+        mainInstruction.layerInstructions = [firstInstruction]
         exporter.outputURL = url
         exporter.outputFileType = AVFileType.mov
         exporter.shouldOptimizeForNetworkUse = true
-        exporter.videoComposition = mainComposition
+        let videoComposition = AVMutableVideoComposition(propertiesOf: mixComposition)
+        videoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
+        videoComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        videoComposition.instructions = [mainInstruction]
+        exporter.videoComposition = videoComposition
         // 6 - Perform the Export
         exporter.exportAsynchronously() {
             DispatchQueue.main.async {
                 self.exportDidFinish(exporter)
             }
         }
-        
     }
-
 }
 
 extension MergeVideoViewController: UIImagePickerControllerDelegate {
@@ -353,6 +419,7 @@ extension MergeVideoViewController: UINavigationControllerDelegate {
 
 extension MergeVideoViewController: AssetDelegate {
     func assetUrlSelected(url: URL) {
+        audioURL = url
         self.audioAsset = AVAsset(url: url)
         print("The Url was passed!")
     }

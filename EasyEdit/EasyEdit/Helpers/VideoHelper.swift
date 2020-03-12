@@ -20,6 +20,7 @@ class VideoHelper {
         mediaUI.mediaTypes = [kUTTypeMovie as String]
         mediaUI.allowsEditing = true
         mediaUI.delegate = delegate
+        mediaUI.modalPresentationStyle = .fullScreen
         delegate.present(mediaUI, animated: true, completion: nil)
     }
     
