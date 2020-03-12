@@ -220,14 +220,13 @@ class MergeVideoViewController: UIViewController {
                 let success = saved && (error == nil)
                 let title = success ? "Success" : "Error"
                 let message = success ? "Video saved to Photo Library" : "Failed to save video"
-                
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
                         self.navigationController?.popToRootViewController(animated: true)
-                    }
-                }))
-                self.present(alert, animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
         
@@ -300,15 +299,15 @@ class MergeVideoViewController: UIViewController {
         let aAudioAssetTrack: AVAssetTrack = aAudioAsset.tracks(withMediaType: AVMediaType.audio)[0]
         
         // Default must have tranformation
-        compositionAddVideo?.preferredTransform = aVideoAssetTrack.preferredTransform
-        
-        if shouldFlipHorizontally {
-            // Flip video horizontally
-            var frontalTransform: CGAffineTransform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-            frontalTransform = frontalTransform.translatedBy(x: -aVideoAssetTrack.naturalSize.width, y: 0.0)
-            frontalTransform = frontalTransform.translatedBy(x: 0.0, y: -aVideoAssetTrack.naturalSize.width)
-            compositionAddVideo?.preferredTransform = frontalTransform
-        }
+//        compositionAddVideo?.preferredTransform = aVideoAssetTrack.preferredTransform
+//
+//        if shouldFlipHorizontally {
+//            // Flip video horizontally
+//            var frontalTransform: CGAffineTransform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+//            frontalTransform = frontalTransform.translatedBy(x: -aVideoAssetTrack.naturalSize.width, y: 0.0)
+//            frontalTransform = frontalTransform.translatedBy(x: 0.0, y: -aVideoAssetTrack.naturalSize.width)
+//            compositionAddVideo?.preferredTransform = frontalTransform
+//        }
         
         mutableCompositionVideoTrack.append(compositionAddVideo!)
         mutableCompositionAudioTrack.append(compositionAddAudio!)
@@ -361,10 +360,20 @@ class MergeVideoViewController: UIViewController {
                                                     return
         }
         
+        let mainInstruction = AVMutableVideoCompositionInstruction()
+        mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero,
+                                                    duration: aVideoAsset.duration)
+
+        let firstInstruction = VideoHelper.videoCompositionInstruction(mutableCompositionVideoTrack.first!, asset: aVideoAsset)
+
+        mainInstruction.layerInstructions = [firstInstruction]
         exporter.outputURL = url
         exporter.outputFileType = AVFileType.mov
         exporter.shouldOptimizeForNetworkUse = true
         let videoComposition = AVMutableVideoComposition(propertiesOf: mixComposition)
+        videoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
+        videoComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        videoComposition.instructions = [mainInstruction]
         exporter.videoComposition = videoComposition
         // 6 - Perform the Export
         exporter.exportAsynchronously() {
