@@ -14,7 +14,7 @@
 		421754A722EF55E500F0D689 /* VideoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421754A622EF55E500F0D689 /* VideoHelper.swift */; };
 		421754AD22EF6AAE00F0D689 /* MergeVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421754AC22EF6AAE00F0D689 /* MergeVideoViewController.swift */; };
 		421754B222EF6BFE00F0D689 /* success.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 421754AF22EF6BFE00F0D689 /* success.mp3 */; };
-		421754B322EF6BFE00F0D689 /* failure.wav in Resources */ = {isa = PBXBuildFile; fileRef = 421754B022EF6BFE00F0D689 /* failure.wav */; };
+		421754B322EF6BFE00F0D689 /* doom.wav in Resources */ = {isa = PBXBuildFile; fileRef = 421754B022EF6BFE00F0D689 /* doom.wav */; };
 		421754B422EF6BFE00F0D689 /* wow.wav in Resources */ = {isa = PBXBuildFile; fileRef = 421754B122EF6BFE00F0D689 /* wow.wav */; };
 		429851E422F1EFFF000F4D34 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429851E322F1EFFF000F4D34 /* Sound.swift */; };
 		429851E622F1F056000F4D34 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429851E522F1F056000F4D34 /* SoundController.swift */; };
@@ -33,7 +33,7 @@
 		421754A622EF55E500F0D689 /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; };
 		421754AC22EF6AAE00F0D689 /* MergeVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeVideoViewController.swift; sourceTree = "<group>"; };
 		421754AF22EF6BFE00F0D689 /* success.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = success.mp3; sourceTree = "<group>"; };
-		421754B022EF6BFE00F0D689 /* failure.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = failure.wav; sourceTree = "<group>"; };
+		421754B022EF6BFE00F0D689 /* doom.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = doom.wav; sourceTree = "<group>"; };
 		421754B122EF6BFE00F0D689 /* wow.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wow.wav; sourceTree = "<group>"; };
 		429851E322F1EFFF000F4D34 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		429851E522F1F056000F4D34 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				421754AF22EF6BFE00F0D689 /* success.mp3 */,
-				421754B022EF6BFE00F0D689 /* failure.wav */,
+				421754B022EF6BFE00F0D689 /* doom.wav */,
 				421754B122EF6BFE00F0D689 /* wow.wav */,
 			);
 			path = EasyEditSoundClips;
@@ -183,7 +183,7 @@
 			files = (
 				421754B422EF6BFE00F0D689 /* wow.wav in Resources */,
 				4217549D22EF537F00F0D689 /* LaunchScreen.storyboard in Resources */,
-				421754B322EF6BFE00F0D689 /* failure.wav in Resources */,
+				421754B322EF6BFE00F0D689 /* doom.wav in Resources */,
 				4217549A22EF537F00F0D689 /* Assets.xcassets in Resources */,
 				421754B222EF6BFE00F0D689 /* success.mp3 in Resources */,
 				4217549822EF537D00F0D689 /* Main.storyboard in Resources */,
