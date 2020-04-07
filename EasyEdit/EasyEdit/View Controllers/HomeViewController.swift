@@ -18,7 +18,6 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate {
     
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
-//    var soundController = SoundController()
     var audioURL: URL?
     
     override func viewDidLoad() {

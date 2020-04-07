@@ -298,16 +298,6 @@ class MergeVideoViewController: UIViewController {
         let aAudioOfVideoAssetTrack: AVAssetTrack? = aVideoAsset.tracks(withMediaType: AVMediaType.audio).first
         let aAudioAssetTrack: AVAssetTrack = aAudioAsset.tracks(withMediaType: AVMediaType.audio)[0]
         
-        // Default must have tranformation
-//        compositionAddVideo?.preferredTransform = aVideoAssetTrack.preferredTransform
-//
-//        if shouldFlipHorizontally {
-//            // Flip video horizontally
-//            var frontalTransform: CGAffineTransform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-//            frontalTransform = frontalTransform.translatedBy(x: -aVideoAssetTrack.naturalSize.width, y: 0.0)
-//            frontalTransform = frontalTransform.translatedBy(x: 0.0, y: -aVideoAssetTrack.naturalSize.width)
-//            compositionAddVideo?.preferredTransform = frontalTransform
-//        }
         
         mutableCompositionVideoTrack.append(compositionAddVideo!)
         mutableCompositionAudioTrack.append(compositionAddAudio!)
@@ -421,7 +411,6 @@ extension MergeVideoViewController: AssetDelegate {
     func assetUrlSelected(url: URL) {
         audioURL = url
         self.audioAsset = AVAsset(url: url)
-        print("The Url was passed!")
     }
 }
 
