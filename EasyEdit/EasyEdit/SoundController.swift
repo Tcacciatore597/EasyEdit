@@ -15,7 +15,8 @@ class SoundController {
     var sounds: [Sound] = [
         Sound(title: "Wow", url: URL(fileURLWithPath: Bundle.main.path(forResource: "wow", ofType: "wav")!)),
         Sound(title: "Doom", url: URL(fileURLWithPath: Bundle.main.path(forResource: "doom", ofType: "wav")!)),
-        Sound(title: "Success", url: URL(fileURLWithPath: Bundle.main.path(forResource: "success", ofType: "mp3")!))
+        Sound(title: "Success", url: URL(fileURLWithPath: Bundle.main.path(forResource: "success", ofType: "mp3")!)),
+        Sound(title: "Rock Beat", url: URL(fileURLWithPath: Bundle.main.path(forResource: "rockbeat", ofType: "aiff")!))
     ]
     
     func saveRecordedAudio(url: URL) {

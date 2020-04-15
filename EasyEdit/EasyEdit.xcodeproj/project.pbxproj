@@ -16,6 +16,7 @@
 		421754B222EF6BFE00F0D689 /* success.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 421754AF22EF6BFE00F0D689 /* success.mp3 */; };
 		421754B322EF6BFE00F0D689 /* doom.wav in Resources */ = {isa = PBXBuildFile; fileRef = 421754B022EF6BFE00F0D689 /* doom.wav */; };
 		421754B422EF6BFE00F0D689 /* wow.wav in Resources */ = {isa = PBXBuildFile; fileRef = 421754B122EF6BFE00F0D689 /* wow.wav */; };
+		4260F1DE2447C04400CC5A9C /* rockbeat.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4260F1DD2447C04400CC5A9C /* rockbeat.aiff */; };
 		429851E422F1EFFF000F4D34 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429851E322F1EFFF000F4D34 /* Sound.swift */; };
 		429851E622F1F056000F4D34 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429851E522F1F056000F4D34 /* SoundController.swift */; };
 		429851E822F1F960000F4D34 /* SoundClipsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429851E722F1F960000F4D34 /* SoundClipsTableViewController.swift */; };
@@ -35,6 +36,7 @@
 		421754AF22EF6BFE00F0D689 /* success.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = success.mp3; sourceTree = "<group>"; };
 		421754B022EF6BFE00F0D689 /* doom.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = doom.wav; sourceTree = "<group>"; };
 		421754B122EF6BFE00F0D689 /* wow.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wow.wav; sourceTree = "<group>"; };
+		4260F1DD2447C04400CC5A9C /* rockbeat.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = rockbeat.aiff; sourceTree = "<group>"; };
 		429851E322F1EFFF000F4D34 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		429851E522F1F056000F4D34 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		429851E722F1F960000F4D34 /* SoundClipsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundClipsTableViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				421754AF22EF6BFE00F0D689 /* success.mp3 */,
 				421754B022EF6BFE00F0D689 /* doom.wav */,
 				421754B122EF6BFE00F0D689 /* wow.wav */,
+				4260F1DD2447C04400CC5A9C /* rockbeat.aiff */,
 			);
 			path = EasyEditSoundClips;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				4217549A22EF537F00F0D689 /* Assets.xcassets in Resources */,
 				421754B222EF6BFE00F0D689 /* success.mp3 in Resources */,
 				4217549822EF537D00F0D689 /* Main.storyboard in Resources */,
+				4260F1DE2447C04400CC5A9C /* rockbeat.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
