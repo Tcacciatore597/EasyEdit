@@ -35,15 +35,16 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate {
                     if allowed {
                         self.recordButton.isHidden = false
                     } else {
+                        //TODO: Error Handling
                         // failed to record!
                     }
                 }
             }
         } catch {
+            //TODO: Error Handling
             // failed to record!
         }
     }
-    
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -68,7 +69,6 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate {
             SoundController.shared.removeOldRecording()
             SoundController.shared.saveRecordedAudio(url: audioRecorder.url)
 
-            
         } catch {
             finishRecording(success: false)
         }
@@ -155,21 +155,14 @@ extension HomeViewController: UIImagePickerControllerDelegate {
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         dismiss(animated: true, completion: nil)
         
-        guard
-            let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String,
-            mediaType == (kUTTypeMovie as String),
-            let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL,
-            UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path)
-            else {
-                return
-        }
+        guard let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String, mediaType == (kUTTypeMovie as String),
+            let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL, UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path) else { return }
         
         UISaveVideoAtPathToSavedPhotosAlbum(
             url.path,
             self,
             #selector(video(_:didFinishSavingWithError:contextInfo:)),
             nil)
-        
     }
 }
 
