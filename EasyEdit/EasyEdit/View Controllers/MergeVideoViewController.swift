@@ -66,6 +66,7 @@ class MergeVideoViewController: UIViewController {
             timeElapsedLabel.isHidden = false
             instructionLabel.isHidden = false
             titleLabel.isHidden = true
+            loadAudioButton.isHidden = true
             imageView.isHidden = true
             instructionLabel.text = "Adjust slider for sound clip placement"
         } else if firstAsset != nil {
