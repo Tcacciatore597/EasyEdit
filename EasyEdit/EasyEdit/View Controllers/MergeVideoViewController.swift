@@ -66,6 +66,7 @@ class MergeVideoViewController: UIViewController {
             timeElapsedLabel.isHidden = false
             instructionLabel.isHidden = false
             titleLabel.isHidden = true
+            loadAudioButton.isHidden = true
             imageView.isHidden = true
             instructionLabel.text = "Adjust slider for sound clip placement"
         } else if firstAsset != nil {
@@ -256,9 +257,8 @@ class MergeVideoViewController: UIViewController {
         }
     }
     
-    
     @IBAction func loadAudioAssetButtonTapped(_ sender: Any) {
-        
+        //performing the segue. Clean up to work with other button.
     }
     
     
@@ -336,10 +336,7 @@ class MergeVideoViewController: UIViewController {
         }
         
         // Exporting
-        
-        
-        
-
+    
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory,
                                                                in: .userDomainMask).first else {
                                                                 return
@@ -378,7 +375,7 @@ class MergeVideoViewController: UIViewController {
         videoComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         videoComposition.instructions = [mainInstruction]
         exporter.videoComposition = videoComposition
-        // 6 - Perform the Export
+        //Export
         exporter.exportAsynchronously() {
             DispatchQueue.main.async {
                 self.exportDidFinish(exporter)

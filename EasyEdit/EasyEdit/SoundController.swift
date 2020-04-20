@@ -30,7 +30,7 @@ class SoundController {
     }
     
     func removeOldRecording() {
-        if SoundController.shared.sounds.count > 3 {
+        if SoundController.shared.sounds.count > 4 {
             SoundController.shared.sounds.removeLast()
         }
     }

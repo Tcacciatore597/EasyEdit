@@ -63,10 +63,5 @@ class SoundClipsTableViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
     
-  
-
 }
 
-extension SoundClipsTableViewController: AVAudioPlayerDelegate {
-    
-}

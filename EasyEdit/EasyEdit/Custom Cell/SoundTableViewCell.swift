@@ -15,7 +15,6 @@ class SoundTableViewCell: UITableViewCell {
     @IBOutlet weak var soundTitleLabel: UILabel!
     @IBOutlet weak var addSoundButton: UIButton!
     
-    
     var sound: Sound? {
         didSet {
             updateViews()
@@ -27,11 +26,5 @@ class SoundTableViewCell: UITableViewCell {
             soundTitleLabel.text = sound.title
         }
     }
-
-    @IBAction func addSoundButtonTapped(_ sender: Any) {
-        
-    
-    }
-    
 
 }
