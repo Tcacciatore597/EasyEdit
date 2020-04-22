@@ -37,12 +37,18 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate {
                     } else {
                         //TODO: Error Handling
                         // failed to record!
+                        let alert = UIAlertController(title: "Permission Error", message: "Go to \"Settings\" > \"EasyEdit\" to change permissions. ", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true)
                     }
                 }
             }
         } catch {
-            //TODO: Error Handling
-            // failed to record!
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Permission Error", message: "Go to \"Settings\" > \"EasyEdit\" to change permissions. ", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
+            }
         }
     }
     
