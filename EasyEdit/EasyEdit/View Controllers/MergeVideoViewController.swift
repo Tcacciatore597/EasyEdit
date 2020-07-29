@@ -145,10 +145,9 @@ class MergeVideoViewController: UIViewController {
         playerLayer!.frame = topRect
         playerLayer!.backgroundColor = UIColor.black.cgColor
         self.view!.layer.addSublayer(playerLayer!)
-//        player?.play()
         
         player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-//        player?.removeTimeObserver(self)
+
         let interval = CMTime(value: 1, timescale: 2)
         self.player?.addPeriodicTimeObserver(forInterval: interval, queue: .main, using: {  (progressTime) in
             let seconds = CMTimeGetSeconds(progressTime)
